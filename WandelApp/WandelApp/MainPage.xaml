@@ -4,11 +4,33 @@
              xmlns:local="clr-namespace:WandelApp"
              x:Class="WandelApp.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ScrollView>
+        <StackLayout x:Name="StackParent" BackgroundColor="Red">
+            <StackLayout x:Name="StackHeader" BackgroundColor="DarkGreen">
+                <Label Text="WandelApp" HorizontalOptions="End" Margin="10" TextColor="White" />
+            </StackLayout>
+            <StackLayout x:Name="StackContent" BackgroundColor="LightGreen">
+                <Label Text="Filters:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0, 0" TextColor="DarkGreen" />
+                <Label Text="Heuveligheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Label  x:Name="Label_Hill" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Slider x:Name="Slider_Hill" Minimum="0" Maximum="2" ValueChanged="Slider_Hill_ValueChanged" />
+                <Label Text="Bosdichtheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Label  x:Name="Label_Forest" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Slider x:Name="Slider_Forest" Minimum="0" Maximum="2" ValueChanged="Slider_Forest_ValueChanged" />
+                <Label Text="Geasfalteerde weg:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Switch x:Name="Switch_Asphalt" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
+            </StackLayout>
+            <StackLayout x:Name="StackFooter" BackgroundColor="LightGreen">
+                <Label Text="Routes:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0 , 0" TextColor="DarkGreen" />
+                <ListView ItemsSource="" HorizontalOptions="CenterAndExpand" Margin="10, 0, 10, 0" >
+                    <ListView.ItemTemplate
+                        ><DataTemplate>
+                            <TextCell Text="abc" Detail="cba" TextColor="DarkGreen" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 
 </ContentPage>
