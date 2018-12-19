@@ -3,6 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <!-- Background color ( contentpages ) -->
 
+            <!-- Header color ( all pages ) -->
+
+            <!-- Buttons color ( all buttons )-->
+
+            <!-- Labels color ( all label ) -->
+
+            <!-- SLider color ( UITZOEKEN PIK ) -->
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
