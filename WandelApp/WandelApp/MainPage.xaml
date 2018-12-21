@@ -9,7 +9,7 @@
             <StackLayout x:Name="StackHeader" BackgroundColor="DarkGreen">
                 <Label Text="WandelApp" HorizontalOptions="End" Margin="10" TextColor="White" />
             </StackLayout>
-            <StackLayout x:Name="StackContent" BackgroundColor="LightGreen">
+            <StackLayout x:Name="StackFilters" BackgroundColor="LightGreen">
                 <Label Text="Filters:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0, 0" TextColor="DarkGreen" />
                 <Label Text="Heuveligheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Label  x:Name="Label_Hill" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
@@ -17,8 +17,18 @@
                 <Label Text="Bosdichtheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Label  x:Name="Label_Forest" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Slider x:Name="Slider_Forest" Minimum="0" Maximum="2" ValueChanged="Slider_Forest_ValueChanged" />
+                <Label Text="Route vlakheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Label  x:Name="Label_Flatness" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Slider x:Name="Slider_Flatness" Minimum="0" Maximum="2" ValueChanged="Slider_Flatness_ValueChanged" />
+                <Label Text="Bewegwijzering:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Label  x:Name="Label_Signs" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Slider x:Name="Slider_Signs" Minimum="0" Maximum="2" ValueChanged="Slider_Signs_ValueChanged" />
                 <Label Text="Geasfalteerde weg:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Switch x:Name="Switch_Asphalt" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
+                <Label Text="Verharde wegen:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Switch x:Name="Switch_Hardened" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
+                <Label Text="Moerassigheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Switch x:Name="Switch_Marshiness" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
             </StackLayout>
             <StackLayout x:Name="StackFooter" BackgroundColor="LightGreen">
                 <Label Text="Routes:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0 , 0" TextColor="DarkGreen" />

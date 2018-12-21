@@ -51,5 +51,15 @@ namespace WandelApp
 
             Label_Forest.Text = prefs.forestDensity.ToString();
         }
+
+        private void Slider_Flatness_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+
+        }
+
+        private void Slider_Signs_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+
+        }
     }
 }
