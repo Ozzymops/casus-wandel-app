@@ -3,8 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.LogInPage">
     <StackLayout>
-        <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout>
+            <!-- log in -->
+            <Label Text="Log in" FontAttributes="Italic" TextColor="DarkGreen" FontSize="24" Margin="10, 30, 0, 0" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Gebruikersnaam:" TextColor="DarkGreen" FontSize="14" Margin="10" />
+                <Entry Placeholder="gebruikersnaam" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Wachtwoord:" TextColor="DarkGreen" FontSize="14" Margin="10" />
+                <Entry Placeholder="wachtwoord" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="Onthouden?" TextColor="DarkGreen" FontSize="14" Margin="10" />
+                <Switch IsToggled="false" Margin="10" Scale="1" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Log in" FontSize="10" />
+                <Button Text="Wachtwoord vergeten?" FontSize="10" />
+            </StackLayout>
+        </StackLayout>
+        <StackLayout>
+            <!-- register? -->
+        </StackLayout>
     </StackLayout>
 </ContentPage>
