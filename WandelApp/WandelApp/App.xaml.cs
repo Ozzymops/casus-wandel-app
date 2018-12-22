@@ -11,7 +11,7 @@ namespace WandelApp
         {
             InitializeComponent();
 
-            MainPage = new Views.RegisterPage(); // reset naar MainPage
+            MainPage = new Views.NewMainPage(); // reset naar MainPage
         }
 
         protected override void OnStart()

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WandelApp.Views.NewMainPage"
+             xmlns:pages="clr-namespace:WandelApp.Views">
+  <MasterDetailPage.Master>
+    <pages:NewMainPageMaster x:Name="MasterPage" />
+  </MasterDetailPage.Master>
+  <MasterDetailPage.Detail>
+    <NavigationPage BarBackgroundColor="DarkGreen">
+      <x:Arguments>
+        <pages:NewMainPageDetail />
+      </x:Arguments>
+    </NavigationPage>
+  </MasterDetailPage.Detail>
+</MasterDetailPage>
