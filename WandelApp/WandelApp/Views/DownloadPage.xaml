@@ -2,11 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.DownloadPage">
-    <ContentPage.Content>
+    <ScrollView>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Label Text="Downloads" FontAttributes="Italic" FontSize="20" TextColor="DarkGreen" Margin="10, 10, 0, 0"/>
+            </StackLayout>
+
+            <StackLayout Margin="10,40,0,0">
+                <Label Text="Download alle routes binnen 1 kilometer" TextColor="DarkGreen"/>
+                <Button Text="Download"/>
+            </StackLayout>
+
+            <StackLayout Margin=" 10,400,0,0">
+                <Label Text="Verwijder alle downloads" TextColor="DarkGreen"/>
+                <Button Text="Verwijder downloads"/>
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        
+    </ScrollView>
+    
 </ContentPage>

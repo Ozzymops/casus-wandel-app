@@ -10,16 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace WandelApp.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RegisterPage : ContentPage
+	public partial class ChangePasswordPage : ContentPage
 	{
-		public RegisterPage ()
+		public ChangePasswordPage ()
 		{
 			InitializeComponent ();
 		}
-
-        private void ConfirmRegisterButton_Clicked(object sender, EventArgs e)
-        {
-            DisplayAlert("Melding", "U bent geregistreerd!", "Oke");
-        }
-    }
+	}
 }

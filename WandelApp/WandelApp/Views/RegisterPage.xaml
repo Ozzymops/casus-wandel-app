@@ -2,30 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.RegisterPage">
-    <StackLayout>
+    <ScrollView>
         <StackLayout>
-            <Label Text="Registeren" FontAttributes="Italic" TextColor="DarkGreen" FontSize="24" Margin="10, 30, 0, 0" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Gebruikersnaam:" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Entry Placeholder="gebruikersnaam" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
+            <StackLayout>
+                <Label Text="Registeren" FontAttributes="Italic" TextColor="DarkGreen" FontSize="24" Margin="10, 30, 0, 0" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                    <Label Text="Gebruikersnaam:" TextColor="DarkGreen" FontSize="14" Margin="10" WidthRequest="106" />
+                    <Entry Placeholder="Gebruikersnaam" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                    <Label Text="Wachtwoord:" TextColor="DarkGreen" FontSize="14" Margin="10" WidthRequest="106"/>
+                    <Entry Placeholder="Wachtwoord" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" IsPassword="True"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                    <Label Text="Wachtwoord verifïeren:" TextColor="DarkGreen" FontSize="14" Margin="10" WidthRequest="106" />
+                    <Entry Placeholder="Wachtwoord" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" IsPassword="True"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                    <Label Text="E-mail adres:" TextColor="DarkGreen" FontSize="14" Margin="10" WidthRequest="106" />
+                    <Entry Placeholder="E-mail" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" Keyboard="Email"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
+                    <Label Text="Ik ga akkoord met de TOS" TextColor="DarkGreen" FontSize="14" Margin="10" WidthRequest="106"/>
+                    <Switch IsToggled="false" Margin="10" Scale="1" />
+                </StackLayout>
+                <Button x:Name="ConfirmRegisterButton" Text="Registreren" Clicked="ConfirmRegisterButton_Clicked" />
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Wachtwoord:" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Entry Placeholder="wachtwoord" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Wachtwoord verifïeren:" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Entry Placeholder="wachtwoord" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="E-mail adres:" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Entry Placeholder="e-mail" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Ik ga akkoord met de TOS" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Switch IsToggled="false" Margin="10" Scale="1" />
-            </StackLayout>
-            <Button Text="Registreren" />
         </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

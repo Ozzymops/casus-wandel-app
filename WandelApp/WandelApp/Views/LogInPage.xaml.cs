@@ -16,5 +16,15 @@ namespace WandelApp.Views
         {
             InitializeComponent();
         }
+
+        private async void RegistrerenButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.RegisterPage());
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.ForgotPasswordPage());
+        }
     }
 }
