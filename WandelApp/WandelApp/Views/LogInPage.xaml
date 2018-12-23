@@ -2,29 +2,37 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.LogInPage">
-    <StackLayout>
+    <ScrollView>
         <StackLayout>
-            <!-- log in -->
-            <Label Text="Log in" FontAttributes="Italic" TextColor="DarkGreen" FontSize="24" Margin="10, 30, 0, 0" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Gebruikersnaam:" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Entry Placeholder="gebruikersnaam" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
+            <StackLayout>
+                <!-- Log in -->
+                <Label Text="Log in" FontAttributes="Italic" FontSize="20" TextColor="DarkGreen" Margin="10, 10, 0, 0" />
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Gebruikersnaam:" FontSize="12" TextColor="DarkGreen" />
+                    <Entry Placeholder="Gebruikersnaam" FontSize="12" TextColor="DarkGreen" PlaceholderColor="DarkGreen" WidthRequest="100" TranslationY="-10" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Wachtwoord:" FontSize="12" TextColor="DarkGreen" />
+                    <Entry Placeholder="Wachtwoord" FontSize="12" TextColor="DarkGreen" PlaceholderColor="DarkGreen" WidthRequest="100" TranslationY="-10" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Label Text="Onthouden?" FontSize="12" TextColor="DarkGreen" Margin="10, 15" HorizontalOptions="Center" />
+                    <Switch IsToggled="false" HorizontalOptions="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="Log in" FontSize="8" Margin="5" />
+                    <Button Text="Wachtwoord vergeten?" FontSize="8" Margin="5" />
+                </StackLayout>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Wachtwoord:" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Entry Placeholder="wachtwoord" TextColor="DarkGreen" PlaceholderColor="DarkGreen" FontSize="14" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Label Text="Onthouden?" TextColor="DarkGreen" FontSize="14" Margin="10" />
-                <Switch IsToggled="false" Margin="10" Scale="1" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                <Button Text="Log in" FontSize="10" />
-                <Button Text="Wachtwoord vergeten?" FontSize="10" />
+            <StackLayout>
+                <!-- Register -->
+                <Label Text="Nog geen account?" FontAttributes="Italic" FontSize="20" TextColor="DarkGreen" Margin="10, 30, 0, 0" />
+                <Label Text="Registreer nu en krijg:" FontSize="14" TextColor="DarkGreen" Margin="10, 0" />
+                <Label Text="Toegang tot een minimaal aantal wandelpaden;" FontSize="12" TextColor="DarkGreen" Margin="30, 0" />
+                <Label Text="Toegang tot een 'geavanceerd' aanradingssysteem voor routes;" FontSize="12" TextColor="DarkGreen" Margin="30, 0" />
+                <Label Text="De mogelijkheid om überhaupt routes te kunnen zien." FontSize="12" TextColor="DarkGreen" Margin="30, 0" />
+                <Button Text="Registreren!" FontSize="10" HorizontalOptions="CenterAndExpand" WidthRequest="300" Margin="20" />
             </StackLayout>
         </StackLayout>
-        <StackLayout>
-            <!-- register? -->
-        </StackLayout>
-    </StackLayout>
+    </ScrollView>
 </ContentPage>

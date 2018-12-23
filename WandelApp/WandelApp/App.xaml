@@ -16,6 +16,10 @@
             <!-- Labels color ( all label ) -->
             <Color x:Key="TextColors">#FFFFFF</Color>
 
+            <!-- Navigation bar colours -->
+            <Color x:Key="NavBarBackgroundColor">#339900</Color>
+            <Color x:Key="NavBarTextColor">White</Color>
+
             <!-- SLider color ( UITZOEKEN PIK ) -->
             <!--<Color x:Key="BackgroundcolorContentpages">#4e9b39</Color> -->
 
@@ -39,6 +43,12 @@
                 <Setter Property="TextColor" Value="{StaticResource TextColors}"/>
             </Style>
 
+            <!-- Navigation bar -->
+            <Style TargetType="NavigationPage" ApplyToDerivedTypes="True">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavBarBackgroundColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource NavBarTextColor}" />
+            </Style>
+            
             <!--stacklayout-->
             <!--
             <Style TargetType="StackLayout" ApplyToDerivedTypes="True">
