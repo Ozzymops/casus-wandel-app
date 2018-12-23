@@ -21,7 +21,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Button Text="Log in" FontSize="8" Margin="5" />
-                    <Button Text="Wachtwoord vergeten?" FontSize="8" Margin="5" />
+                    <Button Text="Wachtwoord vergeten?" FontSize="8" Margin="5" Clicked="Button_Clicked"/>
                 </StackLayout>
             </StackLayout>
             <StackLayout>
@@ -31,7 +31,7 @@
                 <Label Text="Toegang tot een minimaal aantal wandelpaden;" FontSize="12" TextColor="DarkGreen" Margin="30, 0" />
                 <Label Text="Toegang tot een 'geavanceerd' aanradingssysteem voor routes;" FontSize="12" TextColor="DarkGreen" Margin="30, 0" />
                 <Label Text="De mogelijkheid om überhaupt routes te kunnen zien." FontSize="12" TextColor="DarkGreen" Margin="30, 0" />
-                <Button Text="Registreren!" FontSize="10" HorizontalOptions="CenterAndExpand" WidthRequest="300" Margin="20" />
+                <Button x:Name="RegistrerenButton" Text="Registeren!" FontSize="10" HorizontalOptions="CenterAndExpand" WidthRequest="300" Margin="20" Clicked="RegistrerenButton_Clicked"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

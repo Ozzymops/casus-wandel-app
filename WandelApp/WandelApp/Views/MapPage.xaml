@@ -2,11 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.MapPage">
-    <ContentPage.Content>
+    <ScrollView>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="10">
+                <Label x:Name="NameOfRoute" Text="Naam wandelroute" TextColor="DarkGreen"/>
+                <Label x:Name="EstematedRouteTime" Text="Geschatte looptijd" TextColor="DarkGreen"/>
+                <Label x:Name="DifficultyOfRoute" Text="Moeilijkheidsgraad" TextColor="DarkGreen"/>
+                <Label x:Name="RouteDistence" Text="Afstand:" TextColor="DarkGreen"/>
+            </StackLayout>
+
+            <StackLayout Margin="10">
+                <Button Text="Toon meer info"/>
+            </StackLayout>
+
+            <StackLayout Margin="180">
+                <!--Gezever van de map-->
+            </StackLayout>
+
+            <StackLayout Margin="10">
+                <Button Text="Legenda"/>
+            </StackLayout>
+
+            <StackLayout Margin="10">
+                <Label Text="Trivia over Point of Interest:" TextColor="DarkGreen"/>
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>
