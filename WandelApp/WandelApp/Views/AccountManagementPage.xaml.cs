@@ -15,6 +15,9 @@ namespace WandelApp.Views
 		public AccountManagementPage ()
 		{
 			InitializeComponent ();
-		}
+
+            // Set images
+            DownArrowImage.Source = ImageSource.FromFile("SwipeDown.png");
+        }
 	}
 }
