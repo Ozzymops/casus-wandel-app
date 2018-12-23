@@ -16,5 +16,10 @@ namespace WandelApp.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void SaveButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

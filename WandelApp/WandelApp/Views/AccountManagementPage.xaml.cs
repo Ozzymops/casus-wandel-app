@@ -19,5 +19,20 @@ namespace WandelApp.Views
             // Set images
             DownArrowImage.Source = ImageSource.FromFile("SwipeDown.png");
         }
-	}
+
+        private async void ChangePasswordButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.ChangePasswordPage());
+        }
+
+        private async void ChangeEmailButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Views.ChangeEmailPage());
+        }
+
+        private void Deletebutton_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
+        }
+    }
 }
