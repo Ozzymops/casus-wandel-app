@@ -7,15 +7,15 @@
             <StackLayout>
                 <!-- Log in -->
                 <Label Text="Log in" FontAttributes="Italic" FontSize="20" TextColor="DarkGreen" Margin="10, 10, 0, 0" />
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label Text="Gebruikersnaam:" FontSize="12" TextColor="DarkGreen" />
                     <Entry Placeholder="Gebruikersnaam" FontSize="12" TextColor="DarkGreen" PlaceholderColor="DarkGreen" WidthRequest="100" TranslationY="-10" />
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label Text="Wachtwoord:" FontSize="12" TextColor="DarkGreen" />
                     <Entry Placeholder="Wachtwoord" FontSize="12" TextColor="DarkGreen" PlaceholderColor="DarkGreen" WidthRequest="100" TranslationY="-10" />
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start">
                     <Label Text="Onthouden?" FontSize="12" TextColor="DarkGreen" Margin="10, 15" HorizontalOptions="Center" />
                     <Switch IsToggled="false" HorizontalOptions="Center" />
                 </StackLayout>
