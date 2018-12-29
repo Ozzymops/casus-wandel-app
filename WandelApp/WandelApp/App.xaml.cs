@@ -1,4 +1,5 @@
 ﻿using System;
+using WandelApp.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace WandelApp
         {
             InitializeComponent();
 
-            MainPage = new Views.NewMainPage(); // reset naar MainPage
+            MainPage = new NavigationPage(new SplashPage()); // reset naar MainPage
         }
 
         protected override void OnStart()
