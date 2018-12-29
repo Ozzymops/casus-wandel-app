@@ -22,9 +22,15 @@ namespace WandelApp.Views
             await Navigation.PushAsync(new Views.RegisterPage());
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private async void ForgotPassword_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Views.ForgotPasswordPage());
+        }
+
+        private void LogIn_Clicked(object sender, EventArgs e)
+        {
+            // Check of log in gegevens overeen komen met die uit de DB
+
         }
     }
 }

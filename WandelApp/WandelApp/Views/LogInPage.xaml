@@ -20,8 +20,8 @@
                     <Switch IsToggled="false" HorizontalOptions="Center" />
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Button Text="Log in" FontSize="8" Margin="5" />
-                    <Button Text="Wachtwoord vergeten?" FontSize="8" Margin="5" Clicked="Button_Clicked"/>
+                    <Button Text="Log in" FontSize="8" Margin="5" Clicked="LogIn_Clicked" />
+                    <Button Text="Wachtwoord vergeten?" FontSize="8" Margin="5" Clicked="ForgotPassword_Clicked"/>
                 </StackLayout>
             </StackLayout>
             <StackLayout>
