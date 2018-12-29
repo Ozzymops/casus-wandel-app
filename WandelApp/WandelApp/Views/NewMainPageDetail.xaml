@@ -33,7 +33,6 @@
                 <Switch x:Name="Switch_Hardened" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
                 <Label Text="Moerassigheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Switch x:Name="Switch_Marshiness" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
-                <Label Text="*Klik op de filters knop om te de weergave te veranderen"/>
             </StackLayout>
             <StackLayout x:Name="StackFooter" BackgroundColor="LightGreen">
                 <Label Text="Routes:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0 , 0" TextColor="DarkGreen" />
