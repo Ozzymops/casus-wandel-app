@@ -7,7 +7,7 @@ namespace WandelApp.Models
     public enum Hills { None, Sloped, Steep };
     public enum ForestDensity { None, Thin, Thick };
 
-    class Preferences
+    public class Preferences
     {
         public Hills hills = Hills.None;
         public ForestDensity forestDensity = ForestDensity.Thick;

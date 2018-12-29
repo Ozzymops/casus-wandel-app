@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+
+using Newtonsoft.Json;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -29,8 +34,19 @@ namespace WandelApp.Views
 
         private void LogIn_Clicked(object sender, EventArgs e)
         {
-            // Check of log in gegevens overeen komen met die uit de DB
+            LogIn();
+        }
 
+        public async void LogIn()
+        {
+            var baseAddress = new Uri("http://169.254.80.80:59258");
+            var client = new HttpClient { BaseAddress = baseAddress };
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/database?username=Justintje&password=abc");
+            var response = await client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            var user = await response.Content.ReadAsStringAsync();
         }
     }
 }
