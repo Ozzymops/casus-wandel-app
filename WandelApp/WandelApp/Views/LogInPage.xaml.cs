@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,16 +38,13 @@ namespace WandelApp.Views
             LogIn();
         }
 
-        public async void LogIn()
+        public async Task LogIn()
         {
-            var baseAddress = new Uri("http://169.254.80.80:59258");
-            var client = new HttpClient { BaseAddress = baseAddress };
+            var uri = new Uri(string.Format("http://192.168.1.69:45455/api/user/LogIn?username={0}&password={1}", Username.Text, Password.Text));
 
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/database?username=Justintje&password=abc");
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            var user = await response.Content.ReadAsStringAsync();
+            HttpClient client = new HttpClient();
+            var response = await client.GetAsync(uri);
+            await DisplayAlert("Test!", response.ToString(), "OK");
         }
     }
 }
