@@ -4,6 +4,7 @@ using System.Text;
 using WandelApp.Views;
 using Xamarin.Forms;
 using System.Resources;
+using Plugin.SimpleAudioPlayer;
 
 namespace WandelApp.Models
 {
@@ -47,6 +48,9 @@ namespace WandelApp.Models
         {
             base.OnAppearing();
 
+            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            player.Load("splash.wav");
+            player.Play();
             await SplashPageImage.ScaleTo(1, 2000);
             await SplashPageImage.ScaleTo(0.9, 1500, Easing.Linear);
             Application.Current.MainPage = new NewMainPage();
