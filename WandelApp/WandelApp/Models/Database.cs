@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 
-using System.Data.SQLite;
+using SQLite;
+using Xamarin.Forms;
 
 namespace WandelApp.Models
 {
     public class Database
     {
-        /// Deze class bevat een database connection string, alle queries en al het andere database gerelateerd spul.
-        /// 
+        SQLiteConnection dbConnection;
 
-        //public void CheckLogInData(string username, string password)
-        //{
-        //    using (SQLiteConnection conn = new SQLiteConnection())
-        //    {
+        public Database()
+        {
+            
+        }
 
-        //    }
-        //}
+
+        // Sla lokale userdata op.
+
+
+        // Sla lokale preferences data op.
     }
 }
