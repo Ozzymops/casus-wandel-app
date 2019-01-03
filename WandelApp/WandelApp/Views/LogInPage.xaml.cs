@@ -33,9 +33,9 @@ namespace WandelApp.Views
             await Navigation.PushAsync(new Views.ForgotPasswordPage());
         }
 
-        private void LogIn_Clicked(object sender, EventArgs e)
+        private async void LogIn_Clicked(object sender, EventArgs e)
         {
-            LogIn();
+            await LogIn();
 
             // If/else check voor sessie
             // true --> doe niks, zeg dat sessie al ingenomen is.
@@ -44,13 +44,13 @@ namespace WandelApp.Views
 
         public async Task LogIn()
         {
-            // Return User
+            // Return User uit db
             var uri = new Uri(string.Format("http://192.168.1.69:45455/api/user/LogIn?username={0}&password={1}", Username.Text, Password.Text));
 
             HttpClient client = new HttpClient();
             var response = await client.GetStringAsync(uri);
 
-            // Response
+            // Verwerk response
             string statusString;
             if (response == null || response == "null")
             {
@@ -59,10 +59,14 @@ namespace WandelApp.Views
             else
             {
                 Models.User user = JsonConvert.DeserializeObject<Models.User>(response);
-                statusString = "Welkom " + user.Name + "!";
+
+                // Save response naar SQLite
+                Models.Database database = new Models.Database();
+                database.WipeUsers();
+                database.AddUser(user);
+
+                statusString = "Succes! Welkom " + user.Name + "!";
             }
-
-
 
             await DisplayAlert("Bliep!", statusString, "OK");
         }

@@ -10,6 +10,13 @@
                     <Label Text="Accountgegevens van" FontAttributes="Italic" FontSize="14" TextColor="DarkGreen" Margin="10, 10, 0, 0" />
                     <Label Text="{Binding UserName}" TextColor="DarkGreen" FontAttributes="Bold" FontSize="14" />
                 </StackLayout>
+                <!-- Temporary data for testing! -->
+                <Label x:Name="LabelId" Text="Id" TextColor="DarkGreen" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="LabelName" Text="Name" TextColor="DarkGreen" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="LabelUsername" Text="Username" TextColor="DarkGreen" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="LabelPassword" Text="Password" TextColor="DarkGreen" FontAttributes="Bold" FontSize="14" />
+                <Label x:Name="LabelPreferences" Text="Preferences" TextColor="DarkGreen" FontAttributes="Bold" FontSize="14" />
+
                 <Button x:Name="ChangePasswordButton" Text="Wachtwoord wijzigen" FontSize="8" Margin="10" HorizontalOptions="Center" WidthRequest="350" Clicked="ChangePasswordButton_Clicked"/>
                 <Button x:Name="ChangeEmailButton" Text="E-mail adres wijzigen" FontSize="8" Margin="10" HorizontalOptions="Center" WidthRequest="350" Clicked="ChangeEmailButton_Clicked"/>
 

@@ -12,9 +12,21 @@ namespace WandelApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AccountManagementPage : ContentPage
 	{
+        Models.User curUser;
 		public AccountManagementPage ()
 		{
 			InitializeComponent ();
+
+            // Haal SQLite data op
+            Models.Database database = new Models.Database();
+            curUser = database.GetCurrentUser();
+
+            // Zet SQLite data in de bijbehorende labels
+            LabelId.Text = curUser.Id.ToString();
+            LabelName.Text = curUser.Name;
+            LabelUsername.Text = curUser.Username;
+            LabelPassword.Text = curUser.Password;
+            LabelPreferences.Text = curUser.PreferencesId.ToString();
 
             // Set images
             DownArrowImage.Source = ImageSource.FromFile("SwipeDown.png");

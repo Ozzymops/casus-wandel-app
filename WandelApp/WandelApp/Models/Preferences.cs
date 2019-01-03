@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLite;
 
 namespace WandelApp.Models
 {
@@ -11,7 +12,7 @@ namespace WandelApp.Models
 
     public class Preferences
     {
-        public int Id { get; set; }
+        [PrimaryKey]public int Id { get; set; }
         public int Length { get; set; }
         public HillType HillType { get; set; }
         public bool Marshiness { get; set; }
