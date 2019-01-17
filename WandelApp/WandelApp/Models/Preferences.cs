@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+
 using SQLite;
 
 namespace WandelApp.Models
@@ -10,6 +11,7 @@ namespace WandelApp.Models
     public enum RouteFlatness { Flat, Bumpy };
     public enum RoadSigns { None, Some, Many };
 
+    [Table("Preferences")]
     public class Preferences
     {
         [PrimaryKey]public int Id { get; set; }

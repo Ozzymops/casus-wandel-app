@@ -45,7 +45,9 @@ namespace WandelApp.Views
         public async Task LogIn()
         {
             // Return User uit db
-            var uri = new Uri(string.Format("http://192.168.1.69:45455/api/user/LogIn?username={0}&password={1}", Username.Text, Password.Text));
+            //var uri = new Uri(string.Format("http://192.168.56.1:45455/api/user/LogIn?username={0}&password={1}", Username.Text, Password.Text));
+            Models.Constants constants = new Models.Constants();
+            var uri = new Uri(string.Format("{0}/user/LogIn?username={1}&password={2}", Models.Constants.ApiAddress, Username.Text, Password.Text));
 
             HttpClient client = new HttpClient();
             var response = await client.GetStringAsync(uri);
