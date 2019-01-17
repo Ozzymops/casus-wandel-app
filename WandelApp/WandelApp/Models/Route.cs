@@ -23,5 +23,23 @@ namespace WandelApp.Models
         public bool RouteAsphalted { get; set; }
         public bool RouteHardened { get; set; }
         public RoadSigns RoadSigns { get; set; }
+
+        // temp constructor
+        public Route()
+        {
+            Id = 1;
+            Name = "aaa route";
+            StartLocation = 0;
+            EndLocation = 0;
+            Difficulty = 0;
+            Length = 3;
+            HillType = HillType.Steep;
+            Marshiness = false;
+            ForestDensity = ForestDensity.Thin;
+            RouteFlatness = RouteFlatness.Bumpy;
+            RouteAsphalted = true;
+            RouteHardened = true;
+            RoadSigns = RoadSigns.None;
+        }
     }
 }

@@ -8,12 +8,14 @@ using Plugin.SimpleAudioPlayer;
 
 namespace WandelApp.Models
 {
-    class SplashPage : ContentPage
+    public class SplashPage : ContentPage
     {
         Label WelcomeLabel;
         Image SplashPageImage;
 
-
+        /// <summary>
+        /// A splash page is a page that is shown as the very first page in the application. This could be a logo or some other kind of image of 'great' importance.
+        /// </summary>
         public SplashPage()
         {
             NavigationPage.SetHasNavigationBar(this, false);

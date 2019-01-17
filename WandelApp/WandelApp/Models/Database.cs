@@ -6,16 +6,28 @@ using System.Text;
 using SQLite;
 using Xamarin.Forms;
 
-// Code taken from https://www.youtube.com/watch?v=b0JPpVgAv9w
+// Code adapted from https://www.youtube.com/watch?v=b0JPpVgAv9w
 
 namespace WandelApp.Models
 {
     public class Database
     {
+        /// <summary>
+        /// Database settings:
+        /// database - The connection(string) to the internal SQLite database.
+        /// collisionLock - The collision lock exists to prevent overlapping or duplicate entries whilst awaiting other async tasks.
+        /// Users - The observable collection is a list of users.
+        /// </summary>
         private SQLiteConnection database;
         private static object collisionLock = new object();
         public ObservableCollection<User> Users { get; set; }
 
+        /// <summary>
+        /// Constructor:
+        /// A connection is made with the SQLite database.
+        /// The database creates a table. If one already exists, it gets skipped.
+        /// The observable collection list of users is filled with the table from the database.
+        /// </summary>
         public Database()
         {
             database = DependencyService.Get<Interface.IDatabase>().DbConnection();
@@ -25,7 +37,7 @@ namespace WandelApp.Models
 
         #region User
         /// <summary>
-        /// Voeg nieuwe huidige user info toe aan een table.
+        /// Add a new user to the database table.
         /// </summary>
         public void AddUser(User user)
         {
@@ -33,9 +45,9 @@ namespace WandelApp.Models
         }
 
         /// <summary>
-        /// Haal de huidige user info op uit een table.
+        /// Return a single user from the database table.
         /// </summary>
-        /// <returns>De opgehaalde user</returns>
+        /// <returns>a user</returns>
         public User GetCurrentUser()
         {
             lock(collisionLock)
@@ -45,7 +57,7 @@ namespace WandelApp.Models
         }
 
         /// <summary>
-        /// Delete de huidige user info PERMANENT uit een table.
+        /// Delete the current user permanently from the database table.
         /// </summary>
         /// <param name="user"></param>
         public void DeleteCurrentUser(User user)
@@ -61,7 +73,7 @@ namespace WandelApp.Models
         }
 
         /// <summary>
-        /// Wipe alle user info PERMANENT uit een table.
+        /// Completely wipe the user database table, permanently, until remade.
         /// </summary>
         public void WipeUsers()
         {
@@ -75,7 +87,7 @@ namespace WandelApp.Models
 
         #region Danger-Zone!
         /// <summary>
-        /// Delete PERMANENT alle data uit alle tables.
+        /// Completely wipe all database tables, permanently, until remade.
         /// </summary>
         public void WipeDatabase()
         {

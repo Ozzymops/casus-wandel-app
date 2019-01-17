@@ -6,6 +6,10 @@ using SQLite;
 
 namespace WandelApp.Models
 {
+    /// <summary>
+    /// Enums: these enums are used everywhere in the application.
+    /// They determine the available settings for both Preferences and Routes.
+    /// </summary>
     public enum HillType { None, Sloped, Steep };
     public enum ForestDensity { None, Thin, Thick };
     public enum RouteFlatness { Flat, Bumpy };

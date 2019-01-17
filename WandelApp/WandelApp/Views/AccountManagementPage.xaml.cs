@@ -17,11 +17,11 @@ namespace WandelApp.Views
 		{
 			InitializeComponent ();
 
-            // Haal SQLite data op
+            // Return SQLite data
             Models.Database database = new Models.Database();
             curUser = database.GetCurrentUser();
 
-            // Zet SQLite data in de bijbehorende labels
+            // Put SQLite data into existing labels
             LabelId.Text = curUser.Id.ToString();
             LabelName.Text = curUser.Name;
             LabelUsername.Text = curUser.Username;
@@ -45,7 +45,11 @@ namespace WandelApp.Views
         private void Deletebutton_Clicked(object sender, EventArgs e)
         {
             // Debug!
-            DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
+            //DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
+            Models.Route rrr = new Models.Route();
+            Models.CalculateDifficulty cd = new Models.CalculateDifficulty();
+            int difficulty = cd.Difficulty(rrr);
+            DisplayAlert("aaa", difficulty.ToString(), "k");
         }
     }
 }
