@@ -45,11 +45,7 @@ namespace WandelApp.Views
         private void Deletebutton_Clicked(object sender, EventArgs e)
         {
             // Debug!
-            //DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
-            Models.Route rrr = new Models.Route();
-            Models.CalculateDifficulty cd = new Models.CalculateDifficulty();
-            int difficulty = cd.Difficulty(rrr);
-            DisplayAlert("aaa", difficulty.ToString(), "k");
+            DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
         }
     }
 }

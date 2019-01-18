@@ -7,31 +7,30 @@ namespace WandelApp.Models
     public class CalculateDifficulty
     {
         /// <summary>
-        /// Difficulty calculation
-        /// Enum index determines a certain difficulty number.
-        /// All numbers get added up to one single number.
+        /// Calculate difficulty based on given Route.
+        /// Maximum score is 10 --> very hard route.
+        /// Minimum score = 1 --> very easy route.
         /// </summary>
         /// <param name="route"></param>
-        /// <returns></returns>
-
-        public int Difficulty(Route route)
+        /// <returns>double Difficulty</returns>
+        public double Difficulty(Route route)
         {
-            int difficulty = 0;
+            double difficulty = 0;
 
             // Length
-            if(route.Length > 0 && route.Length <= 5)
+            if (route.Length > 0 && route.Length <= 5)
             {
                 difficulty += 1;
             }
             else if (route.Length > 5 && route.Length <= 10)
             {
-                difficulty += 2;
+                difficulty += 1.5;
             }
             else if (route.Length > 10)
             {
-                difficulty += 3;
+                difficulty += 2;
             }
-            
+
             // Enums:
             // HillType
             if (route.HillType == HillType.Sloped)
@@ -46,11 +45,11 @@ namespace WandelApp.Models
             // ForestDensity
             if (route.ForestDensity == ForestDensity.Thin)
             {
-                difficulty += 1;
+                difficulty += 0.5;
             }
             else if (route.ForestDensity == ForestDensity.Thick)
             {
-                difficulty += 2;
+                difficulty += 1;
             }
 
             // RouteFlatness
@@ -79,19 +78,13 @@ namespace WandelApp.Models
             // RouteAsphalted
             if (!route.RouteAsphalted)
             {
-                difficulty += 1;
+                difficulty += 0.5;
             }
 
             // RouteHardened
             if (!route.RouteHardened)
             {
-                difficulty += 1;
-            }
-
-            // hard cap
-            if (difficulty >= 10)
-            {
-                difficulty = 10;
+                difficulty += 0.5;
             }
 
             return difficulty;
