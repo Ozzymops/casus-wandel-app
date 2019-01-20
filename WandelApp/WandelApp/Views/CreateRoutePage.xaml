@@ -3,10 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.CreateRoutePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                    <!-- Placeholder for Maps API -->
+                    <Image x:Name="MapPlaceholderImage" HeightRequest="200" WidthRequest="200" />
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout>
+                        <!-- Tips -->
+                        <Label x:Name="TipLabel" Text="Tik op de kaart om een startpunt te kiezen." TextColor="DarkGreen" />
+                    </StackLayout>
+                    <StackLayout>
+                        <!-- Entries -->
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Route naam:" TextColor="DarkGreen" />
+                            <Entry x:Name="NameEntry" Placeholder="..." TextColor="DarkGreen" PlaceholderColor="DarkGreen" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Lengte:" TextColor="DarkGreen" />
+                            <Stepper x:Name="LengthStepper" Value="0" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="SaveButton" Text="Opslaan" />
+                        <Button x:Name="CancelButton" Text="Annuleren" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
