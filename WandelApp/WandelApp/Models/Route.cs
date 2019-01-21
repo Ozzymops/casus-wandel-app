@@ -14,7 +14,7 @@ namespace WandelApp.Models
         public int Owner { get; set; }
         public int StartLocation { get; set; }
         public int EndLocation { get; set; }
-        public int Difficulty { get; set; }
+        public double Difficulty { get; set; }
         public int Length { get; set; }
         public HillType HillType { get; set; }
         public bool Marshiness { get; set; }

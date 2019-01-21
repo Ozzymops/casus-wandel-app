@@ -15,6 +15,9 @@ namespace WandelApp.Views
 		public CreateRoutePage ()
 		{
 			InitializeComponent ();
-		}
-	}
+
+            // Set placeholder image
+            MapPlaceholderImage.Source = ImageSource.FromFile("Placeholder.png");
+        }
+    }
 }
