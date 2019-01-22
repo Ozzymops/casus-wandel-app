@@ -35,42 +35,9 @@ namespace WandelApp.Views
 
         private async void LogIn_Clicked(object sender, EventArgs e)
         {
-            await LogIn();
-
-            // If/else check voor sessie
-            // true --> doe niks, zeg dat sessie al ingenomen is.
-            // false --> doe LogIn().
-        }
-
-        public async Task LogIn()
-        {
-            // Return User uit db
-            //var uri = new Uri(string.Format("http://192.168.56.1:45455/api/user/LogIn?username={0}&password={1}", Username.Text, Password.Text));
-            Models.Constants constants = new Models.Constants();
-            var uri = new Uri(string.Format("{0}/user/LogIn?username={1}&password={2}", Models.Constants.ApiAddress, Username.Text, Password.Text));
-
-            HttpClient client = new HttpClient();
-            var response = await client.GetStringAsync(uri);
-
-            // Verwerk response
-            string statusString;
-            if (response == null || response == "null")
-            {
-                statusString = "Fout bij het inloggen. Check uw gebruikersnaam en password en probeer het opnieuw.";
-            }
-            else
-            {
-                Models.User user = JsonConvert.DeserializeObject<Models.User>(response);
-
-                // Save response naar SQLite
-                Models.Database database = new Models.Database();
-                database.WipeUsers();
-                database.AddUser(user);
-
-                statusString = "Succes! Welkom " + user.Name + "!";
-            }
-
-            await DisplayAlert("Bliep!", statusString, "OK");
+            Models.Database db = new Models.Database();
+            var status = await db.LogIn(Username.Text, Password.Text);
+            await DisplayAlert("Bliep!", status.ToString(), "OK");
         }
     }
 }
