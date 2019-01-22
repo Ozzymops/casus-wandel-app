@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Text;
-
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SQLite;
 using Xamarin.Forms;
 
@@ -12,6 +14,9 @@ namespace WandelApp.Models
 {
     public class Database
     {
+        private Constants c = new Constants();
+    
+        #region SQLite
         /// <summary>
         /// Database settings:
         /// database - The connection(string) to the internal SQLite database.
@@ -95,6 +100,58 @@ namespace WandelApp.Models
             {
                 database.DropTable<User>();
                 database.CreateTable<User>();
+            }
+        }
+        #endregion
+        #endregion
+        #region API
+        /// <summary>
+        /// Return a boolean to the requested method.
+        /// Returned value is determined by login succes.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns>login status</returns>
+        public async Task<bool> LogIn(string username, string password)
+        {
+            bool status = false;
+
+            var uri = new Uri(string.Format("{0}/user/LogIn?username={1}&password={2}", Models.Constants.ApiAddress, username, password));
+            HttpClient client = new HttpClient();
+            var response = await client.GetStringAsync(uri);
+            
+            if (response != null || response != "null")
+            {
+                User user = JsonConvert.DeserializeObject<User>(response);
+
+                // Save to SQLite
+                WipeUsers();
+                AddUser(user);
+
+                status = true;
+            }
+
+            return status;
+        }
+
+        public async Task<Route> GetRoute(int id)
+        {
+            var uri = new Uri(string.Format("{0}/route/GetRoute?id={1}", Models.Constants.ApiAddress, id));
+            HttpClient client = new HttpClient();
+            var response = await client.GetStringAsync(uri);
+
+            if (response != null || response != "null")
+            {
+                Route route = JsonConvert.DeserializeObject<Route>(response);
+
+                // Save to SQLite
+                //WipeUsers();
+                //AddUser(user);
+                return route;
+            }
+            else
+            {
+                return null;
             }
         }
         #endregion
