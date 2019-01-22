@@ -11,10 +11,6 @@
             </StackLayout>
             <StackLayout x:Name="StackFilters" BackgroundColor="LightGreen">
                 <Label x:Name="FilterButton" Text="Filters:" FontSize="24" TextColor="DarkGreen" HorizontalOptions="Start" Margin="10, 30, 0, 0"/>
-                <!--<StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="Show/Hidden" TextColor="DarkGreen"/>
-                    <Switch IsToggled="False" Scale="1" Toggled="Switch_Toggled"/>
-                </StackLayout>-->
                 <Label Text="Heuveligheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Label  x:Name="Label_Hill" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Slider x:Name="Slider_Hill" Minimum="0" Maximum="2" ValueChanged="Slider_Hill_ValueChanged" />
