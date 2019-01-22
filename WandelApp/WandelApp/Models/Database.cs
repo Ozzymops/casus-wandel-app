@@ -41,7 +41,7 @@ namespace WandelApp.Models
         /// </summary>
         public void AddUser(User user)
         {
-            database.Insert(new User { Id = user.Id, Name = user.Name, Username = user.Username, Password = user.Password, PreferencesId = user.PreferencesId });
+            database.Insert(new User { Id = user.Id, Name = user.Name, Username = user.Username, Password = user.Password });
         }
 
         /// <summary>

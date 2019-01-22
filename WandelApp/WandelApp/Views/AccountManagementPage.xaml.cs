@@ -26,7 +26,6 @@ namespace WandelApp.Views
             LabelName.Text = curUser.Name;
             LabelUsername.Text = curUser.Username;
             LabelPassword.Text = curUser.Password;
-            LabelPreferences.Text = curUser.PreferencesId.ToString();
 
             // Set images
             DownArrowImage.Source = ImageSource.FromFile("SwipeDown.png");

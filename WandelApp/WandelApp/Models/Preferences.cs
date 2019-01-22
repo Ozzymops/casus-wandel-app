@@ -19,26 +19,26 @@ namespace WandelApp.Models
     public class Preferences
     {
         [PrimaryKey]public int Id { get; set; }
-        public int Length { get; set; }
+        public int OwnerId { get; set; }
+        public decimal Length { get; set; }
         public HillType HillType { get; set; }
         public bool Marshiness { get; set; }
         public ForestDensity ForestDensity { get; set; }
         public RouteFlatness RouteFlatness { get; set; }
         public bool RouteAsphalted { get; set; }
-        public bool RouteHardened { get; set; }
         public RoadSigns RoadSigns { get; set; }
 
         // temp constructor
         public Preferences()
         {
             Id = 1;
+            OwnerId = 1;
             Length = 5;
             HillType = HillType.None;
             Marshiness = false;
             ForestDensity = ForestDensity.Thick;
             RouteFlatness = RouteFlatness.Bumpy;
             RouteAsphalted = false;
-            RouteHardened = false;
             RoadSigns = RoadSigns.Many;
         }
     }
