@@ -1,36 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WandelApp.Views.CreateRoutePage">
+             x:Class="WandelApp.Views.CreateRoutePage"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <StackLayout>
-                    <!-- Placeholder for Maps API -->
-                    <Image x:Name="MapPlaceholderImage" HeightRequest="200" WidthRequest="200" />
-                </StackLayout>
-                <StackLayout>
-                    <StackLayout>
-                        <!-- Tips -->
-                        <Label x:Name="TipLabel" Text="Tik op de kaart om een startpunt te kiezen." TextColor="DarkGreen" />
-                    </StackLayout>
-                    <StackLayout>
-                        <!-- Entries -->
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Route naam:" TextColor="DarkGreen" />
-                            <Entry x:Name="NameEntry" Placeholder="..." TextColor="DarkGreen" PlaceholderColor="DarkGreen" />
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="Lengte:" TextColor="DarkGreen" />
-                            <Stepper x:Name="LengthStepper" Value="0" />
-                        </StackLayout>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Button x:Name="SaveButton" Text="Opslaan" />
-                        <Button x:Name="CancelButton" Text="Annuleren" />
-                    </StackLayout>
-                </StackLayout>
+        <StackLayout>
+            <StackLayout x:Name="hideyboi">
+                <!-- Placeholder for Maps API -->
+                <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200" />
             </StackLayout>
-        </ScrollView>
+            <StackLayout>
+                <Button Text="Tap to hide/show Google Maps" Clicked="Button_Clicked"/>
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout>
+                            <!-- Tips -->
+                            <Label x:Name="TipLabel" Text="Tik op de kaart om een startpunt te kiezen." TextColor="DarkGreen" />
+                        </StackLayout>
+                        <StackLayout>
+                            <!-- Entries -->
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Route naam:" TextColor="DarkGreen" />
+                                <Entry x:Name="NameEntry" Placeholder="..." TextColor="DarkGreen" PlaceholderColor="DarkGreen" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Lengte:" TextColor="DarkGreen" />
+                                <Stepper x:Name="LengthStepper" Value="0" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="SaveButton" Text="Opslaan" />
+                            <Button x:Name="CancelButton" Text="Annuleren" />
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

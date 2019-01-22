@@ -15,9 +15,11 @@ namespace WandelApp.Views
 		public CreateRoutePage ()
 		{
 			InitializeComponent ();
+		}
 
-            // Set placeholder image
-            MapPlaceholderImage.Source = ImageSource.FromFile("Placeholder.png");
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            hideyboi.IsVisible = !hideyboi.IsVisible;
         }
     }
 }

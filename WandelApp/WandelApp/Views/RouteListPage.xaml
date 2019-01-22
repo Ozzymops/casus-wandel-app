@@ -17,17 +17,17 @@
                                         <Label Text="{Binding RouteDate}" TextColor="DarkGreen" Grid.Column="1" />
                                         <Image x:Name="EditButton" Source="EditIcon.png" Scale="1" Grid.Row="1">
                                             <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference Name=PageyWagey}" CommandParameter="{Binding .}" />
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference Name=PageyWagey}}" CommandParameter="{Binding .}" />
                                             </Image.GestureRecognizers>
                                         </Image>
                                         <Image x:Name="RemoveButton" Source="TrashIcon.png" Scale="1" Grid.Row="1" Grid.Column="1">
                                             <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoveCommand, Source={x:Reference Name=PageyWagey}" CommandParameter="{Binding .}" />
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.RemoveCommand, Source={x:Reference Name=PageyWagey}}" CommandParameter="{Binding .}" />
                                             </Image.GestureRecognizers>
                                         </Image>
                                         <Image x:Name="WalkButton" Source="NextIcon.png" Scale="1" Grid.Row="1" Grid.Column="2">
                                             <Image.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.WalkCommand, Source={x:Reference Name=PageyWagey}" CommandParameter="{Binding .}" />
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.WalkCommand, Source={x:Reference Name=PageyWagey}}" CommandParameter="{Binding .}" />
                                             </Image.GestureRecognizers>
                                         </Image>
                                     </Grid>

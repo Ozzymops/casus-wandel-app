@@ -9,7 +9,7 @@ namespace WandelApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MapPage : ContentPage
 	{
-        //bool hasLocationPermission = false;
+        bool hasLocationPermission = false;
 
         public MapPage()
         {
@@ -94,7 +94,7 @@ namespace WandelApp.Views
         {
             var center = new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude);
             var span = new Xamarin.Forms.Maps.MapSpan(center, 1, 1);
-            locationsMap.MoveToRegion(span);
+            GoogleAPIMaps.MoveToRegion(span);
         }
     }
 }
