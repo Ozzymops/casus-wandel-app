@@ -150,21 +150,29 @@ namespace WandelApp.Models
         /// <returns>Route</returns>
         public async Task<Route> GetRoute(int id)
         {
-            var uri = new Uri(string.Format("{0}/route/GetRoute?id={1}", Models.Constants.ApiAddress, id));
-            HttpClient client = new HttpClient();
-            var response = await client.GetStringAsync(uri);
-
-            if (response != null || response != "null")
+            try
             {
-                Route route = JsonConvert.DeserializeObject<Route>(response);
+                var uri = new Uri(string.Format("{0}/route/GetRoute?id={1}", Models.Constants.ApiAddress, id));
+                HttpClient client = new HttpClient();
+                var response = await client.GetStringAsync(uri);
 
-                // Save to SQLite
-                return route;
+                if (response != null || response != "null")
+                {
+                    Route route = JsonConvert.DeserializeObject<Route>(response);
+
+                    // Save to SQLite
+                    return route;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return null;
+                l.WriteToLog(e.ToString());
             }
+            return null;
         }
 
         /// <summary>
@@ -173,21 +181,29 @@ namespace WandelApp.Models
         /// <returns>Route list</returns>
         public async Task<List<Route>> GetAllRoutes()
         {
-            var uri = new Uri(string.Format("{0}/route/GetAllRoutes", Models.Constants.ApiAddress));
-            HttpClient client = new HttpClient();
-            var response = await client.GetStringAsync(uri);
-
-            if (response != null || response != "null")
+            try
             {
-                List<Route> routeList = JsonConvert.DeserializeObject<List<Route>>(response);
+                var uri = new Uri(string.Format("{0}/route/GetAllRoutes", Models.Constants.ApiAddress));
+                HttpClient client = new HttpClient();
+                var response = await client.GetStringAsync(uri);
 
-                // Save to SQLite
-                return routeList;
+                if (response != null || response != "null")
+                {
+                    List<Route> routeList = JsonConvert.DeserializeObject<List<Route>>(response);
+
+                    // Save to SQLite
+                    return routeList;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return null;
+                l.WriteToLog(e.ToString());
             }
+            return null;
         }
         #endregion
     }

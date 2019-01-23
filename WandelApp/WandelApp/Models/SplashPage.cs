@@ -50,12 +50,20 @@ namespace WandelApp.Models
         {
             base.OnAppearing();
 
-            var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            player.Load("splash.wav");
-            player.Play();
-            await SplashPageImage.ScaleTo(1, 2000);
-            await SplashPageImage.ScaleTo(0.9, 1500, Easing.Linear);
-            Application.Current.MainPage = new NewMainPage();
+            try
+            {
+                var player = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+                player.Load("splash.wav");
+                player.Play();
+                await SplashPageImage.ScaleTo(1, 2000);
+                await SplashPageImage.ScaleTo(0.9, 1500, Easing.Linear);
+                Application.Current.MainPage = new NewMainPage();
+            }
+            catch (Exception e)
+            {
+                Models.Logger l = new Models.Logger();
+                l.WriteToLog(e.ToString());
+            }
         }
     }
 }

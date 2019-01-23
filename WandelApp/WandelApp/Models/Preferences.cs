@@ -53,68 +53,76 @@ namespace WandelApp.Models
         {
             double difficulty = 0;
 
-            // Length
-            if (preferences.Length > 0 && preferences.Length <= 5)
+            try
             {
-                difficulty += 1;
-            }
-            else if (preferences.Length > 5 && preferences.Length <= 10)
-            {
-                difficulty += 1.5;
-            }
-            else if (preferences.Length > 10)
-            {
-                difficulty += 2;
-            }
+                // Length
+                if (preferences.Length > 0 && preferences.Length <= 5)
+                {
+                    difficulty += 1;
+                }
+                else if (preferences.Length > 5 && preferences.Length <= 10)
+                {
+                    difficulty += 1.5;
+                }
+                else if (preferences.Length > 10)
+                {
+                    difficulty += 2;
+                }
 
-            // Enums:
-            // HillType
-            if (preferences.HillType == HillType.Sloped)
-            {
-                difficulty += 1;
-            }
-            else if (preferences.HillType == HillType.Steep)
-            {
-                difficulty += 2;
-            }
+                // Enums:
+                // HillType
+                if (preferences.HillType == HillType.Sloped)
+                {
+                    difficulty += 1;
+                }
+                else if (preferences.HillType == HillType.Steep)
+                {
+                    difficulty += 2;
+                }
 
-            // ForestDensity
-            if (preferences.ForestDensity == ForestDensity.Thin)
-            {
-                difficulty += 0.5;
-            }
-            else if (preferences.ForestDensity == ForestDensity.Thick)
-            {
-                difficulty += 1;
-            }
+                // ForestDensity
+                if (preferences.ForestDensity == ForestDensity.Thin)
+                {
+                    difficulty += 0.5;
+                }
+                else if (preferences.ForestDensity == ForestDensity.Thick)
+                {
+                    difficulty += 1;
+                }
 
-            // RouteFlatness
-            if (preferences.RouteFlatness == RouteFlatness.Bumpy)
-            {
-                difficulty += 1;
-            }
+                // RouteFlatness
+                if (preferences.RouteFlatness == RouteFlatness.Bumpy)
+                {
+                    difficulty += 1;
+                }
 
-            // RoadSigns
-            if (preferences.RoadSigns == RoadSigns.Some)
-            {
-                difficulty += 1;
-            }
-            else if (preferences.RoadSigns == RoadSigns.None)
-            {
-                difficulty += 2;
-            }
+                // RoadSigns
+                if (preferences.RoadSigns == RoadSigns.Some)
+                {
+                    difficulty += 1;
+                }
+                else if (preferences.RoadSigns == RoadSigns.None)
+                {
+                    difficulty += 2;
+                }
 
-            // Bool:
-            // Marshiness
-            if (preferences.Marshiness)
-            {
-                difficulty += 1;
-            }
+                // Bool:
+                // Marshiness
+                if (preferences.Marshiness)
+                {
+                    difficulty += 1;
+                }
 
-            // RouteAsphalted
-            if (!preferences.RouteAsphalted)
+                // RouteAsphalted
+                if (!preferences.RouteAsphalted)
+                {
+                    difficulty += 0.5;
+                }
+            }
+            catch (Exception e)
             {
-                difficulty += 0.5;
+                Models.Logger l = new Models.Logger();
+                l.WriteToLog(e.ToString());           
             }
 
             return difficulty;
