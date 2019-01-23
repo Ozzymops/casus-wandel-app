@@ -43,7 +43,15 @@ namespace WandelApp.Views
 
         private async void Deletebutton_Clicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
+            // await DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
+            Models.Database db = new Models.Database();
+            List<Models.Route> routeList = await db.GetAllRoutes();
+            int i = 0;
+            foreach (Models.Route route in routeList)
+            {
+                i++;
+                DisplayAlert("Route" + i, route.Id + " - " + route.Name, "Next!");
+            }
         }
     }
 }

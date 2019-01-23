@@ -134,6 +134,11 @@ namespace WandelApp.Models
             return status;
         }
 
+        /// <summary>
+        /// Return a specific Route by id to the requested method.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Route</returns>
         public async Task<Route> GetRoute(int id)
         {
             var uri = new Uri(string.Format("{0}/route/GetRoute?id={1}", Models.Constants.ApiAddress, id));
@@ -145,9 +150,30 @@ namespace WandelApp.Models
                 Route route = JsonConvert.DeserializeObject<Route>(response);
 
                 // Save to SQLite
-                //WipeUsers();
-                //AddUser(user);
                 return route;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Return all available Routes to the requested method.
+        /// </summary>
+        /// <returns>Route list</returns>
+        public async Task<List<Route>> GetAllRoutes()
+        {
+            var uri = new Uri(string.Format("{0}/route/GetAllRoutes", Models.Constants.ApiAddress));
+            HttpClient client = new HttpClient();
+            var response = await client.GetStringAsync(uri);
+
+            if (response != null || response != "null")
+            {
+                List<Route> routeList = JsonConvert.DeserializeObject<List<Route>>(response);
+
+                // Save to SQLite
+                return routeList;
             }
             else
             {
