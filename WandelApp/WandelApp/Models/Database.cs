@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace WandelApp.Models
     public class Database
     {
         private Constants c = new Constants();
+        private Logger l = new Logger();
     
         #region SQLite
         /// <summary>
@@ -112,25 +114,32 @@ namespace WandelApp.Models
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns>login status</returns>
-        public async Task<bool> LogIn(string username, string password)
+        public async Task<int> LogIn(string username, string password)
         {
-            bool status = false;
+            int status = 0;
 
-            var uri = new Uri(string.Format("{0}/user/LogIn?username={1}&password={2}", Models.Constants.ApiAddress, username, password));
-            HttpClient client = new HttpClient();
-            var response = await client.GetStringAsync(uri);
-            
-            if (response != null || response != "null")
+            try
             {
-                User user = JsonConvert.DeserializeObject<User>(response);
+                var uri = new Uri(string.Format("{0}/user/LogIn?username={1}&password={2}", Models.Constants.ApiAddress, username, password));
+                HttpClient client = new HttpClient();
+                var response = await client.GetStringAsync(uri);
 
-                // Save to SQLite
-                WipeUsers();
-                AddUser(user);
+                if (response != null || response != "null")
+                {
+                    User user = JsonConvert.DeserializeObject<User>(response);
 
-                status = true;
+                    // Save to SQLite
+                    WipeUsers();
+                    AddUser(user);
+
+                    status = 1;
+                }
             }
-
+            catch (Exception e)
+            {
+                l.WriteToLog(e.ToString());
+                status = -1;
+            }
             return status;
         }
 

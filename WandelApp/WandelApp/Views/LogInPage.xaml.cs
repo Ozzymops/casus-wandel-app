@@ -37,7 +37,18 @@ namespace WandelApp.Views
         {
             Models.Database db = new Models.Database();
             var status = await db.LogIn(Username.Text, Password.Text);
-            await DisplayAlert("Bliep!", status.ToString(), "OK");
+            if (status == 1)
+            {
+                await DisplayAlert("Succes", "Welkom " + Username.Text + "!", "OK");
+            }
+            else if (status == 0)
+            {
+                await DisplayAlert("Faal", "Controleer uw gebruikersnaam en/of wachtwoord of probeer het later opnieuw.", "OK");
+            }
+            else
+            {
+                await DisplayAlert("Oeps!", "Er is een fout opgetreden. Probeer het later opnieuw.", "SHIT!");
+            }
         }
     }
 }
