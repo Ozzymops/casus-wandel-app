@@ -205,6 +205,37 @@ namespace WandelApp.Models
             }
             return null;
         }
+
+        /// <summary>
+        /// Return all Routes within a certain difficulty range to the requested method.
+        /// </summary>
+        /// <returns>Route list</returns>
+        public async Task<List<Route>> GetRoutesByDifficulty(int difficulty)
+        {
+            try
+            {
+                var uri = new Uri(string.Format("{0}/route/GetRoutesByDifficulty?difficulty={0}", Models.Constants.ApiAddress, difficulty));
+                HttpClient client = new HttpClient();
+                var response = await client.GetStringAsync(uri);
+
+                if (response != null || response != "null")
+                {
+                    List<Route> routeList = JsonConvert.DeserializeObject<List<Route>>(response);
+
+                    // Save to SQLite
+                    return routeList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                l.WriteToLog(e.ToString());
+            }
+            return null;
+        }
         #endregion
     }
 }
