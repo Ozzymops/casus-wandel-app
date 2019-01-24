@@ -15,14 +15,11 @@ namespace WandelApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateRoutePage : ContentPage
     {
-        Models.Route r = new Models.Route();
+        List<Models.Route> routeList = new List<Models.Route>();
 
         public CreateRoutePage()
         {
             InitializeComponent();
-
-            MapVriend.PinCollection.Add(new Pin() { Position = MapVriend.MyPosition, Type = PinType.Generic, Label = "I'm a Pin" });
-
 
             // debug
             DoDebug();
@@ -44,8 +41,15 @@ namespace WandelApp.Views
         private async void DoDebug()
         {
             Models.Database db = new Models.Database();
-            r = await db.GetRoute(1);
+            routeList = await db.GetAllRoutes();
 
+            foreach (Models.Route route in routeList)
+            {
+                var position = new Xamarin.Forms.Maps.Position((double)route.StartLong, (double)route.StartLat);
+                MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = "I'm a Pin" });
+            }
+
+            MapVriend.BindingContext = MapVriend;
             //var position = await Plugin.Geolocator.CrossGeolocator.Current.GetPositionAsync();
             //MapVriend.MyPosition = new Xamarin.Forms.Maps.Position((double)r.StartLat, (double)r.StartLong);
 
