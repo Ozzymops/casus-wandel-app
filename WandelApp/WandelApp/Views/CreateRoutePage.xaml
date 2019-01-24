@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WandelApp.Views.CreateRoutePage"
+             xmlns:models="clr-namespace:WandelApp.Models"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout x:Name="hideyboi">
                 <!-- Google Maps -->
-                <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200" />
+                <!-- <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200" /> -->
+                <models:BindableMap x:Name="MapVriend" MapType="Street" MapPosition="{Binding MyPosition}" MapPins="{Binding PinCollection}" HeightRequest="256" />
             </StackLayout>
             <StackLayout>
                 <Button x:Name="HideMapButton" Text="Verstop kaart" Clicked="HideMapButton_Clicked"/>

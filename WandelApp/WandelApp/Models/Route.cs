@@ -7,21 +7,16 @@ using SQLite;
 namespace WandelApp.Models
 {
     [Table("Route")]
-    public class Route
+    public class Route : Preferences
     {
-        [PrimaryKey, NotNull] public int Id { get; set; }
-        public string Name { get; set; }
-        public int OwnerId { get; set; }
-        public int StartLocation { get; set; }
-        public int EndLocation { get; set; }
         public double Difficulty { get; set; }
-        public decimal Length { get; set; }
-        public HillType HillType { get; set; }
-        public bool Marshiness { get; set; }
-        public ForestDensity ForestDensity { get; set; }
-        public RouteFlatness RouteFlatness { get; set; }
-        public bool RouteAsphalted { get; set; }
-        public RoadSigns RoadSigns { get; set; }
+        public string Name { get; set; }
+        public decimal StartLong { get; set; }
+        public decimal StartLat { get; set; }
+        public decimal EndLong { get; set; }
+        public decimal EndLat { get; set; }
+        public List<POI> POIList { get; set; }
+        public List<RouteSequence> SequenceList { get; set; }
 
         /// <summary>
         /// Calculate difficulty based on given Route.
