@@ -31,15 +31,15 @@ namespace WandelApp.Models
         // temp constructor
         public Preferences()
         {
-            Id = 1;
-            OwnerId = 1;
-            Length = 5;
+            Id = 0;
+            OwnerId = 0;
+            Length = 1;
             HillType = HillType.None;
             Marshiness = false;
-            ForestDensity = ForestDensity.Thick;
-            RouteFlatness = RouteFlatness.Bumpy;
+            ForestDensity = ForestDensity.None;
+            RouteFlatness = RouteFlatness.Flat;
             RouteAsphalted = false;
-            RoadSigns = RoadSigns.Many;
+            RoadSigns = RoadSigns.None;
         }
 
         /// <summary>

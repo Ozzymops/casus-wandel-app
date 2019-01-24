@@ -25,7 +25,7 @@
           <Label
               Grid.Column="1"
               Grid.Row="2"
-              Text="AppName"
+              Text="Wandel App"
               Style="{DynamicResource SubtitleStyle}"
               TextColor="White"/>
         </Grid>

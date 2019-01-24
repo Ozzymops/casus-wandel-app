@@ -103,7 +103,16 @@ namespace WandelApp.Views
 
         private void SavePreferencesButton_Clicked(object sender, EventArgs e)
         {
-            
+            Models.Database DbPreference = new Models.Database();
+
+            DbPreference.SavePreferences(prefs);
+            DisplayAlert("Melding","Voorkeuren opgeslagen","k");
+        }
+
+        private void Slider_Lenght_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            prefs.Length = (decimal)Slider_Lenght.Value;
+            Label_Lenght.Text = Slider_Lenght.ToString();
         }
     }
 }

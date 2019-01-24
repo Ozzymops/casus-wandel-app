@@ -39,6 +39,7 @@ namespace WandelApp.Models
         {
             database = DependencyService.Get<Interface.IDatabase>().DbConnection();
             database.CreateTable<User>();
+            database.CreateTable<Preferences>();
             this.Users = new ObservableCollection<User>(database.Table<User>());
         }
 
@@ -89,6 +90,13 @@ namespace WandelApp.Models
                 database.DropTable<User>();
                 database.CreateTable<User>();
             }
+        }
+        /// <summary>
+        /// Saving the preferences into the SQLite database
+        /// </summary>
+        public void SavePreferences(Preferences preferences)
+        {
+            database.Insert(preferences);
         }
         #endregion
 
