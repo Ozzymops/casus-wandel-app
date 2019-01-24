@@ -5,16 +5,12 @@
              Title="Detail! Detail!">
 
     <ScrollView>
-        <StackLayout x:Name="StackParent" BackgroundColor="Red">
+        <StackLayout x:Name="StackParent" BackgroundColor="DarkGreen">
             <StackLayout x:Name="StackHeader" BackgroundColor="DarkGreen">
                 <Label Text="WandelApp" HorizontalOptions="End" Margin="10" TextColor="White" />
             </StackLayout>
             <StackLayout x:Name="StackFilters" BackgroundColor="LightGreen">
                 <Label x:Name="FilterButton" Text="Filters:" FontSize="24" TextColor="DarkGreen" HorizontalOptions="Start" Margin="10, 30, 0, 0"/>
-                <!--<StackLayout Orientation="Horizontal" Margin="10">
-                    <Label Text="Show/Hidden" TextColor="DarkGreen"/>
-                    <Switch IsToggled="False" Scale="1" Toggled="Switch_Toggled"/>
-                </StackLayout>-->
                 <Label Text="Heuveligheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Label  x:Name="Label_Hill" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Slider x:Name="Slider_Hill" Minimum="0" Maximum="2" ValueChanged="Slider_Hill_ValueChanged" />
@@ -28,19 +24,24 @@
                 <Label  x:Name="Label_Signs" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
                 <Slider x:Name="Slider_Signs" Minimum="0" Maximum="2" ValueChanged="Slider_Signs_ValueChanged" />
                 <Label Text="Geasfalteerde weg:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
-                <Switch x:Name="Switch_Asphalt" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
-                <Label Text="Verharde wegen:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
-                <Switch x:Name="Switch_Hardened" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
+                <Label x:Name="label_asphalted" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Switch x:Name="Switch_Asphalt" IsToggled="False" HorizontalOptions="Center" Scale="0.5" Toggled="Switch_Asphalt_Toggled"/>
                 <Label Text="Moerassigheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
-                <Switch x:Name="Switch_Marshiness" IsToggled="false" HorizontalOptions="Center" Scale="0.5" />
+                <Label x:Name="label_Marshiness" Text="x" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                <Switch x:Name="Switch_Marshiness" IsToggled="false" HorizontalOptions="Center" Scale="0.5" Toggled="Switch_Marshiness_Toggled"/>
+                <Button x:Name="SavePreferencesButton" Text="Save preferences" Margin="20,0,20,5" Clicked="SavePreferencesButton_Clicked"/>
             </StackLayout>
             <StackLayout x:Name="StackFooter" BackgroundColor="LightGreen">
+                <Button Text="Tap to show/hide preferences" Margin="20,5,20,0" Clicked="Button_Clicked"/>
                 <Label Text="Routes:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0 , 0" TextColor="DarkGreen" />
                 <ListView ItemsSource="" HorizontalOptions="CenterAndExpand" Margin="10, 0, 10, 0" >
-                    <ListView.ItemTemplate
-                        >
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="abc" Detail="cba" TextColor="DarkGreen" />
+                            <ViewCell>
+                                <Grid>
+
+                                </Grid>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

@@ -17,7 +17,7 @@
             </StackLayout>
 
             <StackLayout Margin="180">
-                <maps:Map x:Name="locationsMap"/>
+                <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200"/>
             </StackLayout>
 
             <StackLayout Margin="10">
