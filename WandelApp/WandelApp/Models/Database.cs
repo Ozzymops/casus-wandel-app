@@ -91,6 +91,19 @@ namespace WandelApp.Models
                 database.CreateTable<User>();
             }
         }
+
+        /// <summary>
+        /// Return preferences saved in database table.
+        /// </summary>
+        /// <returns></returns>
+        public Preferences GetPreferences()
+        {
+            lock (collisionLock)
+            {
+                return database.Table<Preferences>().FirstOrDefault();
+            }
+        }
+
         /// <summary>
         /// Saving the preferences into the SQLite database
         /// </summary>
@@ -98,6 +111,16 @@ namespace WandelApp.Models
         {
             database.Insert(preferences);
         }
+
+        public void WipePreferences()
+        {
+            lock (collisionLock)
+            {
+                database.DropTable<Preferences>();
+                database.CreateTable<Preferences>();
+            }
+        }
+
         #endregion
 
         #region Danger-Zone!

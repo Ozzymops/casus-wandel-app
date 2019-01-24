@@ -52,13 +52,16 @@ namespace WandelApp.Views
         {
             // await DisplayAlert("Account verwijderen","Weet u het zeker?","Ja","Nee");
             Models.Database db = new Models.Database();
-            List<Models.Route> routeList = await db.GetAllRoutes();
-            int i = 0;
-            foreach (Models.Route route in routeList)
-            {
-                i++;
-                DisplayAlert("Route" + i, route.Id + " - " + route.Name, "Next!");
-            }
+            Models.Preferences p = db.GetPreferences();
+            await DisplayAlert("Preffies", p.Id + " - " + p.Length, "K");
+
+            //List<Models.Route> routeList = await db.GetAllRoutes();
+            //int i = 0;
+            //foreach (Models.Route route in routeList)
+            //{
+            //    i++;
+            //    DisplayAlert("Route" + i, route.Id + " - " + route.Name, "Next!");
+            //}
         }
     }
 }

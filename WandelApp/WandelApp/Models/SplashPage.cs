@@ -63,6 +63,9 @@ namespace WandelApp.Models
             {
                 Models.Logger l = new Models.Logger();
                 l.WriteToLog(e.ToString());
+
+                // Skip splash
+                Application.Current.MainPage = new NewMainPage();
             }
         }
     }
