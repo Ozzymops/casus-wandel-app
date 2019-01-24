@@ -115,8 +115,8 @@ namespace WandelApp.Views
 
         private void Slider_Lenght_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            prefs.Length = (decimal)Slider_Lenght.Value;
-            Label_Lenght.Text = Slider_Lenght.ToString();
+            prefs.Length = (decimal)Slider_Lenght.Value /10;
+            Label_Lenght.Text = prefs.Length.ToString();
         }
     }
 }
