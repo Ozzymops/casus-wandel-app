@@ -17,9 +17,17 @@ namespace WandelApp.Views
 			InitializeComponent ();
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void HideMapButton_Clicked(object sender, EventArgs e)
         {
             hideyboi.IsVisible = !hideyboi.IsVisible;
+            if (hideyboi.IsVisible)
+            {
+                HideMapButton.Text = "Verstop kaart";
+            }
+            else
+            {
+                HideMapButton.Text = "Toon kaart";
+            }
         }
     }
 }

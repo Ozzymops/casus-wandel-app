@@ -17,6 +17,9 @@ namespace WandelApp.Views
         {
             InitializeComponent();
             prefs = new Models.Preferences();
+
+            // Set images
+            HidePreferencesButton.Source = ImageSource.FromFile("down_chevron.png");
         }
 
         private void Slider_Hill_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -86,9 +89,10 @@ namespace WandelApp.Views
         }
 
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void HidePreferencesButton_Clicked(object sender, EventArgs e)
         {
             StackFilters.IsVisible = !StackFilters.IsVisible;
+
         }
 
         private void Switch_Asphalt_Toggled(object sender, ToggledEventArgs e)

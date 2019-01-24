@@ -6,11 +6,11 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout x:Name="hideyboi">
-                <!-- Placeholder for Maps API -->
+                <!-- Google Maps -->
                 <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200" />
             </StackLayout>
             <StackLayout>
-                <Button Text="Tap to hide/show Google Maps" Clicked="Button_Clicked"/>
+                <Button x:Name="HideMapButton" Text="Verstop kaart" Clicked="HideMapButton_Clicked"/>
                 <ScrollView>
                     <StackLayout>
                         <StackLayout>
