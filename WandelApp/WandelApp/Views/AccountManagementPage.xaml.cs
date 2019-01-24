@@ -21,11 +21,18 @@ namespace WandelApp.Views
             Models.Database database = new Models.Database();
             curUser = database.GetCurrentUser();
 
-            // Put SQLite data into existing labels
-            LabelId.Text = curUser.Id.ToString();
-            LabelName.Text = curUser.Name;
-            LabelUsername.Text = curUser.Username;
-            LabelPassword.Text = curUser.Password;
+            if (curUser != null)
+            {
+                // Put SQLite data into existing labels
+                LabelId.Text = curUser.Id.ToString();
+                LabelName.Text = curUser.Name;
+                LabelUsername.Text = curUser.Username;
+                LabelPassword.Text = curUser.Password;
+            }
+            else
+            {
+                LabelId.Text = "Log a.u.b. in.";
+            }
 
             // Set images
             DownArrowImage.Source = ImageSource.FromFile("SwipeDown.png");
