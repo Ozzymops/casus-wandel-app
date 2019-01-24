@@ -121,9 +121,6 @@
     <AndroidResource Include="Resources\drawable\EditIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SplashPageImage.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\splash.wav" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +128,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\down_chevron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\SplashPageImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
