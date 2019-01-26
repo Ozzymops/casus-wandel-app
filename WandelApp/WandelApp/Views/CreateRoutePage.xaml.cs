@@ -51,9 +51,8 @@ namespace WandelApp.Views
             List<Models.POI> poiList = new List<Models.POI>();
             List<Models.RouteSequence> sequenceList = new List<Models.RouteSequence>();
 
-            // Fill lists here
+            // Fill POI & RouteSequence lists here
 
-            Models.Preferences enumSource = new Models.Preferences();
             Models.Route newRoute = new Models.Route()
             {
                 Id = 0,
@@ -76,7 +75,8 @@ namespace WandelApp.Views
             };
             newRoute.Difficulty = newRoute.CalculateDifficulty(newRoute);
 
-            // db.SaveRoute(newRoute);
+            // db.SaveRoute(newRoute)
+            // First, save internally and then try to push externally.
             // Make DB create seperate tables of POI and Sequence
         }
 
@@ -86,9 +86,21 @@ namespace WandelApp.Views
             route = await db.GetRoute(1);
 
             var position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.StartLat), Convert.ToDouble(route.StartLong));
-            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = route.Name + " start!" });
+            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = "Start!" });
             position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.EndLat), Convert.ToDouble(route.EndLong));
-            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = route.Name + " eind!" });
+            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = "Eind!" });
+
+            foreach (Models.RouteSequence rs in route.SequenceList)
+            {
+                position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(rs.Lat), Convert.ToDouble(rs.Long));
+                MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.SavedPin, Label = "Stap " + rs.StepNumber.ToString() + "!" });
+            }
+
+            foreach (Models.POI poi in route.POIList)
+            {
+                position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(poi.Lat), Convert.ToDouble(poi.Long));
+                MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Place, Label = poi.Name });
+            }
 
             //routeList = await db.GetAllRoutes();
 
