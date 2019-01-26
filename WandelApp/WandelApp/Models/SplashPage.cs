@@ -33,8 +33,8 @@ namespace WandelApp.Models
             SplashPageImage = new Image
             {
                 Source = ImageSource.FromFile("SplashPageImage.png"),
-                WidthRequest = 150,
-                HeightRequest = 150
+                WidthRequest = 256,
+                HeightRequest = 256
             };
             AbsoluteLayout.SetLayoutFlags(SplashPageImage, AbsoluteLayoutFlags.PositionProportional);
             AbsoluteLayout.SetLayoutBounds(SplashPageImage, new Rectangle(0.5, 0.5, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
@@ -56,7 +56,7 @@ namespace WandelApp.Models
                 player.Load("splash.wav");
                 player.Play();
                 await SplashPageImage.ScaleTo(1, 2000);
-                await SplashPageImage.ScaleTo(0.9, 1500, Easing.Linear);
+                await SplashPageImage.ScaleTo(0.8, 2000, Easing.Linear);
                 Application.Current.MainPage = new NewMainPage();
             }
             catch (Exception e)

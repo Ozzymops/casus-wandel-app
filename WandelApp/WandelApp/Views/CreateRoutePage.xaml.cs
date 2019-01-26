@@ -15,6 +15,7 @@ namespace WandelApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateRoutePage : ContentPage
     {
+        Models.Route route = new Models.Route();
         List<Models.Route> routeList = new List<Models.Route>();
 
         public CreateRoutePage()
@@ -41,13 +42,22 @@ namespace WandelApp.Views
         private async void DoDebug()
         {
             Models.Database db = new Models.Database();
-            routeList = await db.GetAllRoutes();
+            route = await db.GetRoute(1);
 
-            foreach (Models.Route route in routeList)
-            {
-                var position = new Xamarin.Forms.Maps.Position((double)route.StartLong, (double)route.StartLat);
-                MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = "I'm a Pin" });
-            }
+            var position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.StartLat), Convert.ToDouble(route.StartLong));
+            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = route.Name + " start!" });
+            position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.EndLat), Convert.ToDouble(route.EndLong));
+            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = route.Name + " eind!" });
+
+            //routeList = await db.GetAllRoutes();
+
+            //foreach (Models.Route route in routeList)
+            //{
+            //    var position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.StartLat), Convert.ToDouble(route.StartLong));
+            //    MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = route.Name });
+            //}
+
+
 
             MapVriend.BindingContext = MapVriend;
             //var position = await Plugin.Geolocator.CrossGeolocator.Current.GetPositionAsync();
