@@ -9,7 +9,8 @@
             <StackLayout x:Name="hideyboi">
                 <!-- Google Maps -->
                 <!-- <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200" /> -->
-                <models:BindableMap x:Name="MapVriend" MapType="Street" MapPosition="{Binding MyPosition}" MapPins="{Binding PinCollection}" HeightRequest="200" />
+                <!-- <models:BindableMap x:Name="MapVriend" MapType="Street" MapPosition="{Binding MyPosition}" MapPins="{Binding PinCollection}" HeightRequest="200" /> -->
+                <models:CustomMap x:Name="TheMap" MapType="Street" HeightRequest="200" Tapped="TheMap_Tapped" />
             </StackLayout>
             <StackLayout>
                 <!-- Tips -->
