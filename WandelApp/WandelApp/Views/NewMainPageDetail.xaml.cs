@@ -118,5 +118,14 @@ namespace WandelApp.Views
             prefs.Length = (decimal)Slider_Lenght.Value /10;
             Label_Lenght.Text = prefs.Length.ToString();
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            Models.Database db = new Models.Database();
+            List<Route> routes = await db.GetAllRoutes();
+            ListOfRoutes.ItemsSource = routes;
+        }
     }
 }
