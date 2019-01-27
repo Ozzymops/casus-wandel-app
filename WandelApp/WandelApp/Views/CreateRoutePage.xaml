@@ -9,29 +9,83 @@
             <StackLayout x:Name="hideyboi">
                 <!-- Google Maps -->
                 <!-- <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200" /> -->
-                <models:BindableMap x:Name="MapVriend" MapType="Street" MapPosition="{Binding MyPosition}" MapPins="{Binding PinCollection}" HeightRequest="256" />
+                <models:BindableMap x:Name="MapVriend" MapType="Street" MapPosition="{Binding MyPosition}" MapPins="{Binding PinCollection}" HeightRequest="200" />
             </StackLayout>
             <StackLayout>
-                <Button x:Name="HideMapButton" Text="Verstop kaart" Clicked="HideMapButton_Clicked"/>
+                <!-- Tips -->
+                <Label x:Name="TipLabel" Text="Tik op de kaart om een startpunt te kiezen." TextColor="DarkGreen" />
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="StartLocButton" Text="Kies startlocatie" Clicked="StartLocButton_Clicked" HeightRequest="50" FontSize="12" Margin="1" WidthRequest="125" />
+                    <Button x:Name="EndLocButton" Text="Kies eindlocatie" Clicked="EndLocButton_Clicked" HeightRequest="50" FontSize="12" Margin="1" WidthRequest="125" />
+                </StackLayout>
+                <Button x:Name="HideMapButton" Text="Verstop kaart" Clicked="HideMapButton_Clicked" HeightRequest="50" Margin="1" />
                 <ScrollView>
                     <StackLayout>
                         <StackLayout>
-                            <!-- Tips -->
-                            <Label x:Name="TipLabel" Text="Tik op de kaart om een startpunt te kiezen." TextColor="DarkGreen" />
-                        </StackLayout>
-                        <StackLayout>
-                            <!-- Entries -->
+                            <!-- Name -->
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="Route naam:" TextColor="DarkGreen" />
-                                <Entry x:Name="NameEntry" Placeholder="..." TextColor="DarkGreen" PlaceholderColor="DarkGreen" />
+                                <Entry x:Name="NameEntry" Placeholder="..." TextColor="DarkGreen" PlaceholderColor="DarkGreen" WidthRequest="200" />
                             </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Lengte:" TextColor="DarkGreen" />
-                                <Stepper x:Name="LengthStepper" Value="0" />
+                            <!-- Length -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Lengte:" TextColor="DarkGreen" />
+                                    <Label x:Name="LengthLabel" Text="0" TextColor="DarkGreen" />
+                                    <Stepper x:Name="LengthStepper" Minimum="0" Maximum="20" Increment="1" ValueChanged="LengthStepper_ValueChanged" />
+                                </StackLayout>
+                            </StackLayout>
+                            <!-- HillType -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Heuveligheid:" TextColor="DarkGreen" />
+                                    <Label x:Name="HillTypeLabel" Text="Vlak" TextColor="DarkGreen" />
+                                </StackLayout>
+                                <Stepper x:Name="HillTypeStepper" Minimum="0" Maximum="2" Increment="1" ValueChanged="HillTypeStepper_ValueChanged" />
+                            </StackLayout>
+                            <!-- RouteFlatness -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Hobbeligheid:" TextColor="DarkGreen" />
+                                    <Label x:Name="RouteFlatnessLabel" Text="Vlak" TextColor="DarkGreen" />
+                                </StackLayout>
+                                <Stepper x:Name="RouteFlatnessStepper" Minimum="0" Maximum="1" Increment="1" ValueChanged="RouteFlatnessStepper_ValueChanged" />
+                            </StackLayout>
+                            <!-- ForestDensity -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Bosdichtheid:" TextColor="DarkGreen" />
+                                    <Label x:Name="ForestDensityLabel" Text="Geen" TextColor="DarkGreen" />
+                                </StackLayout>
+                                <Stepper x:Name="ForestDensityStepper" Minimum="0" Maximum="2" Increment="1" ValueChanged="ForestDensityStepper_ValueChanged" />
+                            </StackLayout>
+                            <!-- RoadSigns -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Bewegwijzering:" TextColor="DarkGreen" />
+                                    <Label x:Name="RoadSignsLabel" Text="Geen" TextColor="DarkGreen" />
+                                </StackLayout>
+                                <Stepper x:Name="RoadSignsStepper" Minimum="0" Maximum="2" Increment="1" ValueChanged="RoadSignsStepper_ValueChanged" />
+                            </StackLayout>
+                            <!-- RouteAsphalted -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Geasfalteerde route:" TextColor="DarkGreen" />
+                                    <Label x:Name="RouteAsphaltedLabel" Text="Nee" TextColor="DarkGreen" />
+                                </StackLayout>
+                                <Switch x:Name="RouteAsphaltedSwitch" Toggled="RouteAsphaltedSwitch_Toggled" />
+                            </StackLayout>
+                            <!-- Marshiness -->
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Zompige route:" TextColor="DarkGreen" />
+                                    <Label x:Name="MarshinessLabel" Text="Nee" TextColor="DarkGreen" />
+                                </StackLayout>
+                                <Switch x:Name="MarshinessSwitch" Toggled="MarshinessSwitch_Toggled" />
                             </StackLayout>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="SaveButton" Text="Opslaan" />
+                            <Button x:Name="SaveButton" Text="Opslaan" Clicked="SaveButton_Clicked" />
                             <Button x:Name="CancelButton" Text="Annuleren" />
                         </StackLayout>
                     </StackLayout>
