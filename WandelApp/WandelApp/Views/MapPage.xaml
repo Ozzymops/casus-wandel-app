@@ -9,7 +9,7 @@
                 <Label x:Name="NameOfRoute" Text="Naam wandelroute" TextColor="DarkGreen"/>
                 <Label x:Name="EstematedRouteTime" Text="Geschatte looptijd" TextColor="DarkGreen"/>
                 <Label x:Name="DifficultyOfRoute" Text="Moeilijkheidsgraad" TextColor="DarkGreen"/>
-                <Label x:Name="RouteDistence" Text="Afstand:" TextColor="DarkGreen"/>
+                <Label x:Name="RouteDistance" Text="Afstand:" TextColor="DarkGreen"/>
             </StackLayout>
 
             <StackLayout Margin="10">
