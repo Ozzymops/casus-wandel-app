@@ -24,8 +24,6 @@ namespace WandelApp.Views
 
             // debug
             DoDebug();
-
-
         }
 
         private void HideMapButton_Clicked(object sender, EventArgs e)
@@ -85,35 +83,31 @@ namespace WandelApp.Views
             Models.Database db = new Models.Database();
             route = await db.GetRoute(1);
 
-            var position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.StartLat), Convert.ToDouble(route.StartLong));
-            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = "Start!" });
-            position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.EndLat), Convert.ToDouble(route.EndLong));
-            MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = "Eind!" });
-
-            foreach (Models.RouteSequence rs in route.SequenceList)
+            // Other method of displaying Pins
+            var startPin = new Models.CustomPin()
             {
-                position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(rs.Lat), Convert.ToDouble(rs.Long));
-                MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.SavedPin, Label = "Stap " + rs.StepNumber.ToString() + "!" });
-            }
+                Position = new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong),
+                Label = "Start punt!",
+                Type = PinType.Generic,
+                Name = "START",
+                Description = "Start punt van " + route.Name
+            };
 
-            foreach (Models.POI poi in route.POIList)
+            var endPin = new Models.CustomPin()
             {
-                position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(poi.Lat), Convert.ToDouble(poi.Long));
-                MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Place, Label = poi.Name });
-            }
+                Position = new Xamarin.Forms.Maps.Position((double)route.EndLat, (double)route.EndLong),
+                Label = "Eind punt!",
+                Type = PinType.Generic,
+                Name = "EIND",
+                Description = "Eind punt van " + route.Name
+            };
 
-            //routeList = await db.GetAllRoutes();
+            TheMap.CustomPins = new List<Models.CustomPin>() { startPin, endPin };
+            TheMap.Pins.Add(startPin);
+            TheMap.Pins.Add(endPin);
 
-            //foreach (Models.Route route in routeList)
-            //{
-            //    var position = new Xamarin.Forms.Maps.Position(Convert.ToDouble(route.StartLat), Convert.ToDouble(route.StartLong));
-            //    MapVriend.PinCollection.Add(new Pin() { Position = position, Type = PinType.Generic, Label = route.Name });
-            //}
-
-            MapVriend.BindingContext = MapVriend;
-            //var position = await Plugin.Geolocator.CrossGeolocator.Current.GetPositionAsync();
-            //MapVriend.MyPosition = new Xamarin.Forms.Maps.Position((double)r.StartLat, (double)r.StartLong);
-
+            // Move to Pins
+            TheMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong), Distance.FromKilometers(1.0)));
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
@@ -121,6 +115,17 @@ namespace WandelApp.Views
             CreateRoute();
         }
 
+        private void StartLocButton_Clicked(object sender, EventArgs e)
+        {
+            // Tik op kaart en laat een pin verschijnen
+        }
+
+        private void EndLocButton_Clicked(object sender, EventArgs e)
+        {
+            // Tik op kaart en laat een pin verschijnen
+        }
+
+        #region Values
         private void HillTypeStepper_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             switch (HillTypeStepper.Value)
@@ -150,16 +155,6 @@ namespace WandelApp.Views
                 Models.Logger l = new Models.Logger();
                 l.WriteToLog("Een of andere bullshit error weer: " + exc);
             }
-        }
-
-        private void StartLocButton_Clicked(object sender, EventArgs e)
-        {
-            // Tik op kaart en laat een pin verschijnen
-        }
-
-        private void EndLocButton_Clicked(object sender, EventArgs e)
-        {
-            // Tik op kaart en laat een pin verschijnen
         }
 
         private void RouteFlatnessStepper_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -234,6 +229,12 @@ namespace WandelApp.Views
             {
                 MarshinessLabel.Text = "Nee";
             }
+        }
+        #endregion
+
+        private void TheMap_Tapped(object sender, Models.MapTapEventArgs e)
+        {
+            DisplayAlert("Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
         }
     }
 }
