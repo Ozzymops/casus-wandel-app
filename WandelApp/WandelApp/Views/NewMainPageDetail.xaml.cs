@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,9 +124,23 @@ namespace WandelApp.Views
         {
             base.OnAppearing();
 
+            try
+            {
             Models.Database db = new Models.Database();
             List<Route> routes = await db.GetAllRoutes();
-            ListOfRoutes.ItemsSource = routes;
+            ObservableCollection<Route> routecollection = new ObservableCollection<Route>();
+            foreach(Route route in routes)
+            {
+                routecollection.Add(route);
+            }
+            ListOfRoutes.ItemsSource = routecollection;
+            ListOfRoutes.BindingContext = this.BindingContext;
+            }
+            catch(Exception e)
+            {
+                Models.Logger l = new Models.Logger();
+                l.WriteToLog(e.ToString());
+            }
         }
     }
 }

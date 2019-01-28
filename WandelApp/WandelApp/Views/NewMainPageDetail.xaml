@@ -40,7 +40,11 @@
                 <!-- <Button x:Name="HidePreferencesButton" Text="Verstop voorkeuren" Margin="20,5,20,0" Clicked="HidePreferencesButton_Clicked"/> -->
                 <Label Text="Routes:" FontSize="24" HorizontalOptions="Start" Margin="10, 30, 0 , 0" TextColor="DarkGreen" />
                 <ListView x:Name="ListOfRoutes" ItemsSource="" HorizontalOptions="CenterAndExpand" Margin="10, 0, 10, 0" >
-
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                        <TextCell Text="{Binding Name}" TextColor="DarkGreen" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
         </StackLayout>
