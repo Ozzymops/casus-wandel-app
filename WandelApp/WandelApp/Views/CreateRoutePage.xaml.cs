@@ -87,24 +87,54 @@ namespace WandelApp.Views
             var startPin = new Models.CustomPin()
             {
                 Position = new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong),
-                Label = "Start punt!",
+                Label = "Start",
                 Type = PinType.Generic,
-                Name = "START",
+                Name = "Start punt!",
                 Description = "Start punt van " + route.Name
             };
 
             var endPin = new Models.CustomPin()
             {
                 Position = new Xamarin.Forms.Maps.Position((double)route.EndLat, (double)route.EndLong),
-                Label = "Eind punt!",
+                Label = "Eind",
                 Type = PinType.Generic,
-                Name = "EIND",
+                Name = "Eind punt!",
                 Description = "Eind punt van " + route.Name
             };
 
             TheMap.CustomPins = new List<Models.CustomPin>() { startPin, endPin };
             TheMap.Pins.Add(startPin);
+
+            foreach (var customPin in route.SequenceList)
+            {
+                var stepPin = new Models.CustomPin()
+                {
+                    Position = new Xamarin.Forms.Maps.Position((double)customPin.Lat, (double)customPin.Long),
+                    Label = "Step",
+                    Type = PinType.Generic,
+                    Name = "Stap " + customPin.StepNumber.ToString(),
+                    Description = "Step " + customPin.StepNumber.ToString()
+                };
+                TheMap.Pins.Add(stepPin);
+            }
+
+            foreach (var customPin in route.POIList)
+            {
+                var poiPin = new Models.CustomPin()
+                {
+                    Position = new Xamarin.Forms.Maps.Position((double)customPin.Lat, (double)customPin.Long),
+                    Label = "POI",
+                    Type = PinType.Generic,
+                    Name = customPin.Name,
+                    Description = customPin.Description
+                };
+                TheMap.Pins.Add(poiPin);
+            }
+
             TheMap.Pins.Add(endPin);
+
+            Models.Logger l = new Models.Logger();
+            l.WriteToLog("Two pins added!");
 
             // Move to Pins
             TheMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong), Distance.FromKilometers(1.0)));
