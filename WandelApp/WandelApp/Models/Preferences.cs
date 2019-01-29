@@ -49,20 +49,16 @@ namespace WandelApp.Models
         /// </summary>
         /// <param name="route"></param>
         /// <returns>double Difficulty</returns>
-        public double CalculateDifficulty(Preferences preferences)
+        public int CalculateDifficulty(Preferences preferences)
         {
-            double difficulty = 0;
+            int difficulty = 0;
 
             try
             {
                 // Length
-                if (preferences.Length > 0 && preferences.Length <= 5)
+                if (preferences.Length > 0 && preferences.Length <= 10)
                 {
                     difficulty += 1;
-                }
-                else if (preferences.Length > 5 && preferences.Length <= 10)
-                {
-                    difficulty += 1.5;
                 }
                 else if (preferences.Length > 10)
                 {
@@ -83,11 +79,11 @@ namespace WandelApp.Models
                 // ForestDensity
                 if (preferences.ForestDensity == ForestDensity.Thin)
                 {
-                    difficulty += 0.5;
+                    difficulty += 1;
                 }
                 else if (preferences.ForestDensity == ForestDensity.Thick)
                 {
-                    difficulty += 1;
+                    difficulty += 2;
                 }
 
                 // RouteFlatness
@@ -116,13 +112,14 @@ namespace WandelApp.Models
                 // RouteAsphalted
                 if (!preferences.RouteAsphalted)
                 {
-                    difficulty += 0.5;
+                    difficulty += 1;
                 }
+
             }
             catch (Exception e)
             {
                 Models.Logger l = new Models.Logger();
-                l.WriteToLog(e.ToString());           
+                l.WriteToLog(e.ToString());
             }
 
             return difficulty;

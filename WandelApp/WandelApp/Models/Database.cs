@@ -242,7 +242,7 @@ namespace WandelApp.Models
         /// Return all Routes within a certain difficulty range to the requested method.
         /// </summary>
         /// <returns>Route list</returns>
-        public async Task<List<Route>> GetRoutesByDifficulty(double difficulty)
+        public async Task<List<Route>> GetRoutesByDifficulty(int difficulty)
         {
             try
             {

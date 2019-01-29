@@ -155,6 +155,23 @@ namespace WandelApp.Views
             //    Models.Logger l = new Models.Logger();
             //    l.WriteToLog(e.ToString());
             //}
+
+            Models.Logger l = new Models.Logger();
+
+            base.OnAppearing();
+
+            Models.Database db = new Models.Database();
+            Preferences preferences = db.GetPreferences();
+            int diff = preferences.CalculateDifficulty(preferences);
+            l.WriteToLog(diff.ToString());
+
+            List<Route> routes = await db.GetRoutesByDifficulty(diff);
+
+            foreach (Route route in routes)
+            {
+                l.WriteToLog("Route! " + route.Name);
+            }
+
         }
 
         /// <summary>
