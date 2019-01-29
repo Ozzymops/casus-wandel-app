@@ -25,38 +25,85 @@ namespace WandelApp.Droid
 {
     public class CustomMapRenderer : MapRenderer, IOnMapReadyCallback
     {
+        Models.Logger l = new Models.Logger();
+
         List<CustomPin> customPins;
         private GoogleMap _map;
+        private CustomMap formsMap;
+        private Polyline finalLine;
+        private bool _mapDrawn;
 
         public CustomMapRenderer(Context context) : base(context)
         {
-
+            l.WriteToLog("Constructor!");
         }
 
-        public void OnMapReady(GoogleMap map)
+        protected override void OnMapReady(GoogleMap map)
         {
+
+            if (_mapDrawn)
+            {
+                return;
+            }
+
+            l.WriteToLog("OnMapReady!");
+
+            base.OnMapReady(map);
+
             _map = map;
 
             if (_map != null)
             {
                 _map.MapClick += googleMap_MapClick;
             }
+
+            foreach (var customPin in formsMap.CustomPins)
+            {
+                var markerWithIcon = new MarkerOptions();
+
+                markerWithIcon.SetPosition(new LatLng(customPin.Position.Latitude, customPin.Position.Longitude));
+                markerWithIcon.SetTitle(customPin.Name);
+                markerWithIcon.SetSnippet(customPin.Description);
+                
+                if (customPin.Label.Contains("Start"))
+                {
+                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StartPin));
+                }
+                else if (customPin.Label.Contains("Eind"))
+                {
+                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.EndPin));
+                }
+                else if (customPin.Label.Contains("POI"))
+                {
+                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
+                }
+                else if (customPin.Label.Contains("Step"))
+                {
+                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StepPin));
+                }
+
+                var m = base.NativeMap.AddMarker(markerWithIcon);
+            }
+
+            _mapDrawn = true;
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Map> e)
         {
+            l.WriteToLog("OnElementChanged!");
+
             base.OnElementChanged(e);
 
             if (e.NewElement != null)
             {
-                var formsMap = (CustomMap)e.NewElement;
-                customPins = formsMap.CustomPins;
-                Control.GetMapAsync(this);
-
                 if (_map != null)
                 {
                     _map.MapClick -= googleMap_MapClick;
                 }
+
+                formsMap = (CustomMap)e.NewElement;
+                customPins = formsMap.CustomPins;                
+                Control.GetMapAsync(this);
             }
         }
 
@@ -67,6 +114,7 @@ namespace WandelApp.Droid
 
         protected override MarkerOptions CreateMarker(Pin pin)
         {
+            l.WriteToLog("CreateMarker - pin " + pin.Label);
             var marker = new MarkerOptions();
             marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
             marker.SetTitle(pin.Label);
@@ -77,23 +125,21 @@ namespace WandelApp.Droid
             {
                 marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StartPin));
             }
-
-            if (pin.Label.Contains("Eind"))
+            else if (pin.Label.Contains("Eind"))
             {
                 marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.EndPin));
-
             }
-
-            if (pin.Label.Contains("Step"))
+            else if (pin.Label.Contains("Step"))
             {
                 marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StepPin));
-
             }
-
-            if (pin.Label.Contains("POI"))
+            else if (pin.Label.Contains("POI"))
             {
                 marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
-
+            }
+            else
+            {
+                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.Placeholder));
             }
 
             return marker;
