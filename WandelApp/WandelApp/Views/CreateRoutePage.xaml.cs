@@ -15,18 +15,24 @@ namespace WandelApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateRoutePage : ContentPage
     {
-        Models.Route route = new Models.Route();
-        List<Models.Route> routeList = new List<Models.Route>();
-
-        bool setStartLoc = true;
-        bool setEndLoc = false;
+        Models.Route currentRoute = new Models.Route();
 
         public CreateRoutePage()
         {
-            InitializeComponent();
-
-            // debug
+            // Test
             DoDebug();
+
+            InitializeComponent();
+        }
+
+        // Test
+        public async void DoDebug()
+        {
+            Models.Logger l = new Models.Logger();
+            l.WriteToLog("bullshit 1");
+            Models.Database db = new Models.Database();
+            currentRoute = await db.GetRoute(1);
+            DrawPins(currentRoute);
         }
 
         private void HideMapButton_Clicked(object sender, EventArgs e)
@@ -81,66 +87,16 @@ namespace WandelApp.Views
             // Make DB create seperate tables of POI and Sequence
         }
 
-        private async void DoDebug()
+        private void DrawPins(Models.Route route)
         {
-            Models.Database db = new Models.Database();
-            route = await db.GetRoute(1);
-
-            // Other method of displaying Pins
-            var startPin = new Models.CustomPin()
-            {
-                Position = new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong),
-                Label = "Start",
-                Type = PinType.Generic,
-                Name = "Start punt!",
-                Description = "Start punt van " + route.Name
-            };
-
-            var endPin = new Models.CustomPin()
-            {
-                Position = new Xamarin.Forms.Maps.Position((double)route.EndLat, (double)route.EndLong),
-                Label = "Eind",
-                Type = PinType.Generic,
-                Name = "Eind punt!",
-                Description = "Eind punt van " + route.Name
-            };
-
-            TheMap.CustomPins = new List<Models.CustomPin>() { startPin, endPin };
-            TheMap.Pins.Add(startPin);
-
-            foreach (var customPin in route.SequenceList)
-            {
-                var stepPin = new Models.CustomPin()
-                {
-                    Position = new Xamarin.Forms.Maps.Position((double)customPin.Lat, (double)customPin.Long),
-                    Label = "Step",
-                    Type = PinType.Generic,
-                    Name = "Stap " + customPin.StepNumber.ToString(),
-                    Description = "Step " + customPin.StepNumber.ToString()
-                };
-                TheMap.Pins.Add(stepPin);
-            }
-
-            foreach (var customPin in route.POIList)
-            {
-                var poiPin = new Models.CustomPin()
-                {
-                    Position = new Xamarin.Forms.Maps.Position((double)customPin.Lat, (double)customPin.Long),
-                    Label = "POI",
-                    Type = PinType.Generic,
-                    Name = customPin.Name,
-                    Description = customPin.Description
-                };
-                TheMap.Pins.Add(poiPin);
-            }
-
-            TheMap.Pins.Add(endPin);
-
             Models.Logger l = new Models.Logger();
-            l.WriteToLog("DoDebug - Pins");
+            l.WriteToLog("bullshit 2");
 
-            // Move to Pins
-            TheMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong), Distance.FromKilometers(1.0)));
+            List<Models.CustomPin> pinList = TheMap.CreatePinList(route);
+
+            TheMap.CustomPins = pinList;
+
+            TheMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position(pinList[0].Position.Latitude, pinList[0].Position.Longitude), Distance.FromKilometers(1.0)));
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
@@ -151,15 +107,11 @@ namespace WandelApp.Views
         private void StartLocButton_Clicked(object sender, EventArgs e)
         {
             // Tik op kaart en laat een pin verschijnen
-            setStartLoc = true;
-            setEndLoc = false;
         }
 
         private void EndLocButton_Clicked(object sender, EventArgs e)
         {
             // Tik op kaart en laat een pin verschijnen
-            setStartLoc = false;
-            setEndLoc = true;
         }
 
         #region Values
@@ -271,18 +223,7 @@ namespace WandelApp.Views
 
         private void TheMap_Tapped(object sender, Models.MapTapEventArgs e)
         {
-            if (setStartLoc)
-            {
-                route.StartLat = (decimal)e.Position.Latitude;
-                route.StartLong = (decimal)e.Position.Longitude;
-                DisplayAlert("Start Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
-            }
-            else if (setEndLoc)
-            {
-                route.EndLat = (decimal)e.Position.Latitude;
-                route.EndLong = (decimal)e.Position.Longitude;
-                DisplayAlert("Eind Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
-            }
+            DisplayAlert("Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
         }
     }
 }

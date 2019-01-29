@@ -131,30 +131,30 @@ namespace WandelApp.Views
         /// </summary>
         protected override async void OnAppearing()
         {
-            base.OnAppearing();
+            //base.OnAppearing();
 
-            try
-            {
-                Models.Database dbase = new Models.Database();
-                Preferences preferences = dbase.GetPreferences();
-                double difficulty = preferences.CalculateDifficulty(preferences);
+            //try
+            //{
+            //    Models.Database dbase = new Models.Database();
+            //    Preferences preferences = dbase.GetPreferences();
+            //    double difficulty = preferences.CalculateDifficulty(preferences);
 
-                Models.Database db = new Models.Database();
-                List<Route> routes = await db.GetRoutesByDifficulty(difficulty);
-                ObservableCollection<Route> routecollection = new ObservableCollection<Route>();
+            //    Models.Database db = new Models.Database();
+            //    List<Route> routes = await db.GetRoutesByDifficulty(difficulty);
+            //    ObservableCollection<Route> routecollection = new ObservableCollection<Route>();
 
-            foreach(Route route in routes)
-            {
-                routecollection.Add(route);
-            }
-            ListOfRoutes.ItemsSource = routecollection;
-            ListOfRoutes.BindingContext = this.BindingContext;
-            }
-            catch(Exception e)
-            {
-                Models.Logger l = new Models.Logger();
-                l.WriteToLog(e.ToString());
-            }
+            //foreach(Route route in routes)
+            //{
+            //    routecollection.Add(route);
+            //}
+            //ListOfRoutes.ItemsSource = routecollection;
+            //ListOfRoutes.BindingContext = this.BindingContext;
+            //}
+            //catch(Exception e)
+            //{
+            //    Models.Logger l = new Models.Logger();
+            //    l.WriteToLog(e.ToString());
+            //}
         }
 
         /// <summary>

@@ -94,6 +94,7 @@ namespace WandelApp.Models
                 {
                     difficulty += 0.5;
                 }
+
             }
             catch (Exception e)
             {
