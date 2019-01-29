@@ -41,10 +41,10 @@ namespace WandelApp.Droid
         protected override void OnMapReady(GoogleMap map)
         {
 
-            if (_mapDrawn)
-            {
-                return;
-            }
+            //if (_mapDrawn)
+            //{
+              //  return;
+            //}
             
             l.WriteToLog("OnMapReady!");
 
@@ -57,36 +57,35 @@ namespace WandelApp.Droid
                 _map.MapClick += googleMap_MapClick;
             }
 
-            // Clear map?
-            // _map.Clear();
+                l.WriteToLog("CustomPins!");
 
-            foreach (var customPin in formsMap.CustomPins)
-            {
-                var markerWithIcon = new MarkerOptions();
+                foreach (var customPin in formsMap.CustomPins)
+                {
+                    var markerWithIcon = new MarkerOptions();
 
-                markerWithIcon.SetPosition(new LatLng(customPin.Position.Latitude, customPin.Position.Longitude));
-                markerWithIcon.SetTitle(customPin.Name);
-                markerWithIcon.SetSnippet(customPin.Description);
-                
-                if (customPin.Label.Contains("Start"))
-                {
-                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StartPin));
-                }
-                else if (customPin.Label.Contains("Eind"))
-                {
-                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.EndPin));
-                }
-                else if (customPin.Label.Contains("POI"))
-                {
-                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
-                }
-                else if (customPin.Label.Contains("Step"))
-                {
-                    markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StepPin));
-                }
+                    markerWithIcon.SetPosition(new LatLng(customPin.Position.Latitude, customPin.Position.Longitude));
+                    markerWithIcon.SetTitle(customPin.Name);
+                    markerWithIcon.SetSnippet(customPin.Description);
 
-                var m = base.NativeMap.AddMarker(markerWithIcon);
-            }
+                    if (customPin.Label.Contains("Start"))
+                    {
+                        markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StartPin));
+                    }
+                    else if (customPin.Label.Contains("Eind"))
+                    {
+                        markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.EndPin));
+                    }
+                    else if (customPin.Label.Contains("POI"))
+                    {
+                        markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
+                    }
+                    else if (customPin.Label.Contains("Step"))
+                    {
+                        markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StepPin));
+                    }
+
+                    var m = base.NativeMap.AddMarker(markerWithIcon);
+                }
 
             _mapDrawn = true;
         }
@@ -112,41 +111,43 @@ namespace WandelApp.Droid
 
         private void googleMap_MapClick(object sender, GoogleMap.MapClickEventArgs e)
         {
+            l.WriteToLog("MapClick!");
+
             ((CustomMap)Element).OnTap(new Position(e.Point.Latitude, e.Point.Longitude));
         }
 
-        protected override MarkerOptions CreateMarker(Pin pin)
-        {
-            l.WriteToLog("CreateMarker - pin " + pin.Label);
-            var marker = new MarkerOptions();
-            marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
-            marker.SetTitle(pin.Label);
-            marker.SetSnippet(pin.Address);
+        //protected override MarkerOptions CreateMarker(Pin pin)
+        //{
+        //    l.WriteToLog("CreateMarker - pin " + pin.Label);
+        //    var marker = new MarkerOptions();
+        //    marker.SetPosition(new LatLng(pin.Position.Latitude, pin.Position.Longitude));
+        //    marker.SetTitle(pin.Label);
+        //    marker.SetSnippet(pin.Address);
 
-            // Determine image
-            if (pin.Label.Contains("Start"))
-            {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StartPin));
-            }
-            else if (pin.Label.Contains("Eind"))
-            {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.EndPin));
-            }
-            else if (pin.Label.Contains("Step"))
-            {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StepPin));
-            }
-            else if (pin.Label.Contains("POI"))
-            {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
-            }
-            else
-            {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.Placeholder));
-            }
+        //    // Determine image
+        //    if (pin.Label.Contains("Start"))
+        //    {
+        //        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StartPin));
+        //    }
+        //    else if (pin.Label.Contains("Eind"))
+        //    {
+        //        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.EndPin));
+        //    }
+        //    else if (pin.Label.Contains("Step"))
+        //    {
+        //        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.StepPin));
+        //    }
+        //    else if (pin.Label.Contains("POI"))
+        //    {
+        //        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
+        //    }
+        //    else
+        //    {
+        //        marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.Placeholder));
+        //    }
 
-            return marker;
-        }
+        //    return marker;
+        //}
 
     }
 }

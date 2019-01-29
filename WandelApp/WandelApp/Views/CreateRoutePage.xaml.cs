@@ -137,7 +137,7 @@ namespace WandelApp.Views
             TheMap.Pins.Add(endPin);
 
             Models.Logger l = new Models.Logger();
-            l.WriteToLog("Two pins added!");
+            l.WriteToLog("DoDebug - Pins");
 
             // Move to Pins
             TheMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Xamarin.Forms.Maps.Position((double)route.StartLat, (double)route.StartLong), Distance.FromKilometers(1.0)));
@@ -275,13 +275,14 @@ namespace WandelApp.Views
             {
                 route.StartLat = (decimal)e.Position.Latitude;
                 route.StartLong = (decimal)e.Position.Longitude;
+                DisplayAlert("Start Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
             }
             else if (setEndLoc)
             {
                 route.EndLat = (decimal)e.Position.Latitude;
                 route.EndLong = (decimal)e.Position.Longitude;
+                DisplayAlert("Eind Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
             }
-            // DisplayAlert("Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
         }
     }
 }
