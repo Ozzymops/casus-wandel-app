@@ -238,6 +238,7 @@ namespace WandelApp.Models
             return null;
         }
 
+        #region HELL
         /// <summary>
         /// Return all Routes within a certain difficulty range to the requested method.
         /// </summary>
@@ -268,6 +269,7 @@ namespace WandelApp.Models
             }
             return null;
         }
+        #endregion
         #endregion
     }
 }
