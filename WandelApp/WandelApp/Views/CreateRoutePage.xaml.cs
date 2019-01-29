@@ -18,6 +18,9 @@ namespace WandelApp.Views
         Models.Route route = new Models.Route();
         List<Models.Route> routeList = new List<Models.Route>();
 
+        bool setStartLoc = true;
+        bool setEndLoc = false;
+
         public CreateRoutePage()
         {
             InitializeComponent();
@@ -148,11 +151,15 @@ namespace WandelApp.Views
         private void StartLocButton_Clicked(object sender, EventArgs e)
         {
             // Tik op kaart en laat een pin verschijnen
+            setStartLoc = true;
+            setEndLoc = false;
         }
 
         private void EndLocButton_Clicked(object sender, EventArgs e)
         {
             // Tik op kaart en laat een pin verschijnen
+            setStartLoc = false;
+            setEndLoc = true;
         }
 
         #region Values
@@ -264,7 +271,17 @@ namespace WandelApp.Views
 
         private void TheMap_Tapped(object sender, Models.MapTapEventArgs e)
         {
-            DisplayAlert("Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
+            if (setStartLoc)
+            {
+                route.StartLat = (decimal)e.Position.Latitude;
+                route.StartLong = (decimal)e.Position.Longitude;
+            }
+            else if (setEndLoc)
+            {
+                route.EndLat = (decimal)e.Position.Latitude;
+                route.EndLong = (decimal)e.Position.Longitude;
+            }
+            // DisplayAlert("Tapped!", e.Position.Latitude + " | " + e.Position.Longitude, "OK!");
         }
     }
 }

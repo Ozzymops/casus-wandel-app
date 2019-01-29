@@ -45,7 +45,7 @@ namespace WandelApp.Droid
             {
                 return;
             }
-
+            
             l.WriteToLog("OnMapReady!");
 
             base.OnMapReady(map);
@@ -56,6 +56,9 @@ namespace WandelApp.Droid
             {
                 _map.MapClick += googleMap_MapClick;
             }
+
+            // Clear map?
+            // _map.Clear();
 
             foreach (var customPin in formsMap.CustomPins)
             {
