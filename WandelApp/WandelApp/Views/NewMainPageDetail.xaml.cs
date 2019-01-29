@@ -22,7 +22,12 @@ namespace WandelApp.Views
             // Set images
             HidePreferencesButton.Source = ImageSource.FromFile("down_chevron.png");
         }
-
+        /// <summary>
+        /// Alle sliders krijgen een waardes toegewezen. Wanneer een waarde gekozen wordt krijg hij een resultaat.
+        /// dat resultaat word opgeslagen om preferences te kunnen opslaan.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Slider_Hill_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             if (Slider_Hill.Value >= 0 && Slider_Hill.Value < 1)
@@ -110,6 +115,7 @@ namespace WandelApp.Views
         {
             Models.Database DbPreference = new Models.Database();
 
+            DbPreference.WipePreferences();
             DbPreference.SavePreferences(prefs);
             DisplayAlert("Melding","Voorkeuren opgeslagen","k");
         }
@@ -120,15 +126,23 @@ namespace WandelApp.Views
             Label_Lenght.Text = prefs.Length.ToString();
         }
 
+        /// <summary>
+        /// Wanneer de pagina geopend wordt, moet de list van routes getoond worden.
+        /// </summary>
         protected override async void OnAppearing()
         {
             base.OnAppearing();
 
             try
             {
-            Models.Database db = new Models.Database();
-            List<Route> routes = await db.GetAllRoutes();
-            ObservableCollection<Route> routecollection = new ObservableCollection<Route>();
+                Models.Database dbase = new Models.Database();
+                Preferences preferences = dbase.GetPreferences();
+                double difficulty = preferences.CalculateDifficulty(preferences);
+
+                Models.Database db = new Models.Database();
+                List<Route> routes = await db.GetRoutesByDifficulty(difficulty);
+                ObservableCollection<Route> routecollection = new ObservableCollection<Route>();
+
             foreach(Route route in routes)
             {
                 routecollection.Add(route);
@@ -141,6 +155,26 @@ namespace WandelApp.Views
                 Models.Logger l = new Models.Logger();
                 l.WriteToLog(e.ToString());
             }
+        }
+
+        /// <summary>
+        /// Wanneer een route wordt geselecteerd dan moet hij worden ingeladen op de pagina MapPage. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void ListOfRoutes_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            try
+            {
+                var content = e.Item;
+                await Navigation.PushAsync(new MapPage(content));
+            }
+            catch (Exception ex)
+            {
+                Models.Logger l = new Models.Logger();
+                l.WriteToLog(ex.ToString());
+            }
+
         }
     }
 }

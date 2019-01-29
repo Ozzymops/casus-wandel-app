@@ -40,7 +40,6 @@ namespace WandelApp.Models
             database = DependencyService.Get<Interface.IDatabase>().DbConnection();
             database.CreateTable<User>();
             database.CreateTable<Preferences>();
-            //database.CreateTable<Route>();
             this.Users = new ObservableCollection<User>(database.Table<User>());
         }
 
@@ -243,7 +242,7 @@ namespace WandelApp.Models
         /// Return all Routes within a certain difficulty range to the requested method.
         /// </summary>
         /// <returns>Route list</returns>
-        public async Task<List<Route>> GetRoutesByDifficulty(int difficulty)
+        public async Task<List<Route>> GetRoutesByDifficulty(double difficulty)
         {
             try
             {

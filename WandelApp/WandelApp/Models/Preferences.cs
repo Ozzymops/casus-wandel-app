@@ -33,7 +33,7 @@ namespace WandelApp.Models
         {
             Id = 0;
             OwnerId = 0;
-            Length = 1;
+            Length = 0;
             HillType = HillType.None;
             Marshiness = false;
             ForestDensity = ForestDensity.None;
