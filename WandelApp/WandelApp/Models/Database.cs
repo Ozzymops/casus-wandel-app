@@ -294,6 +294,36 @@ namespace WandelApp.Models
             return result;
         }
 
+        /// <summary>
+        /// Fetch last used Id (Route).
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> GetLastId()
+        {
+            try
+            {
+                var uri = new Uri(string.Format("{0}/route/GetLastId", Models.Constants.ApiAddress));
+                HttpClient client = new HttpClient();
+                var response = await client.GetStringAsync(uri);
+
+                if (response != null || response != "null")
+                {
+                    l.WriteToLog(response);
+                    // Save to SQLite
+                    return Convert.ToInt32(response);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                l.WriteToLog(e.ToString());
+            }
+            return 0;
+        }
+
         #region HELL
         /// <summary>
         /// Return all Routes within a certain difficulty range to the requested method.

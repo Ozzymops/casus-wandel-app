@@ -13,6 +13,11 @@ namespace WandelApp.Models
 
         public event EventHandler<MapTapEventArgs> Tapped;
 
+        public CustomMap()
+        {
+            CustomPins = new List<CustomPin>();
+        }
+
         /// <summary>
         /// Allow user to pass coordinates on tap.
         /// </summary>

@@ -36,6 +36,8 @@ namespace WandelApp.Droid
         public CustomMapRenderer(Context context) : base(context)
         {
             l.WriteToLog("Constructor!");
+
+            customPins = new List<CustomPin>();
         }
 
         protected override void OnMapReady(GoogleMap map)
@@ -56,9 +58,17 @@ namespace WandelApp.Droid
                 _map.MapClick += googleMap_MapClick;
             }
 
+            _mapDrawn = true;
+        }
+
+        private void UpdatePins()
+        {
             try
             {
-                foreach (var customPin in formsMap.CustomPins)
+                var m = base.NativeMap;
+                m.Clear();
+
+                foreach (var customPin in customPins)
                 {
                     l.WriteToLog("CustomPin godver, " + customPin.Name);
 
@@ -85,15 +95,13 @@ namespace WandelApp.Droid
                         markerWithIcon.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.POIPin));
                     }
 
-                    var m = base.NativeMap.AddMarker(markerWithIcon);
+                    m.AddMarker(markerWithIcon);
                 }
             }
             catch (Exception e)
             {
                 l.WriteToLog(e.ToString());
             }
-
-            _mapDrawn = true;
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Map> e)
@@ -112,6 +120,8 @@ namespace WandelApp.Droid
                 formsMap = (CustomMap)e.NewElement;
                 customPins = formsMap.CustomPins;                
                 Control.GetMapAsync(this);
+
+                UpdatePins();
             }
         }
 
@@ -120,6 +130,8 @@ namespace WandelApp.Droid
             l.WriteToLog("MapClick!");
 
             ((CustomMap)Element).OnTap(new Position(e.Point.Latitude, e.Point.Longitude));
+
+            UpdatePins();
         }
 
         protected override MarkerOptions CreateMarker(Pin pin)
