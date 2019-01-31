@@ -5,13 +5,17 @@
              xmlns:models="clr-namespace:WandelApp.Models"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout x:Name="Mapstacker">
-                <models:CustomMap x:Name="MapPage" MapType="Street" HeightRequest="200" />
+        <!-- Map grid -->
+        <Grid x:Name="MapGrid" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <!-- Map -->
+            <StackLayout>
+                <models:CustomMap x:Name="CMap" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Tapped="CMap_Tapped" />
             </StackLayout>
-            <ScrollView>
-                <Label x:Name="LabelNameRoute" Text="Naam van de route:"/>
-            </ScrollView>
-        </StackLayout>
+            <!-- Top buttons -->
+            <StackLayout VerticalOptions="Start" HorizontalOptions="Center">
+                <Label x:Name="NameLabel" Text="..." TextColor="DarkGreen" FontSize="12" VerticalTextAlignment="Center" />
+                <Label x:Name="LengthLabel" Text=".." TextColor="DarkGreen" FontSize="12" VerticalOptions="Center" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

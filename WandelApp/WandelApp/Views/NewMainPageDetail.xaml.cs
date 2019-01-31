@@ -162,7 +162,7 @@ namespace WandelApp.Views
         /// <param name="e"></param>
         private async void ListOfRoutes_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushAsync(new MapPage());
+            await Navigation.PushAsync(new MapPage((Models.Route)ListOfRoutes.SelectedItem));
         }
     }
 }
