@@ -19,6 +19,29 @@ namespace WandelApp.Views
             InitializeComponent();
             prefs = new Models.Preferences();
 
+            // Preferences
+            try
+            {
+                Models.Database db = new Models.Database();
+                Models.Preferences preferences = db.GetPreferences();
+                if (preferences != null)
+                {
+                    // Set up sliders and stuff
+                    Slider_Hill.Value = (double)preferences.HillType;
+                    Slider_Forest.Value = (double)preferences.ForestDensity;
+                    Slider_Flatness.Value = (double)preferences.RouteFlatness;
+                    Slider_Signs.Value = (double)preferences.RoadSigns;
+                    Slider_Lenght.Value = (double)preferences.Length;
+                    Switch_Asphalt.IsToggled = preferences.RouteAsphalted;
+                    Switch_Marshiness.IsToggled = preferences.Marshiness;
+                }
+            }
+            catch (Exception e)
+            {
+                Models.Logger l = new Models.Logger();
+                l.WriteToLog(e.ToString());
+            }
+
             // Set images
             HidePreferencesButton.Source = ImageSource.FromFile("down_chevron.png");
         }
@@ -33,17 +56,18 @@ namespace WandelApp.Views
             if (Slider_Hill.Value >= 0 && Slider_Hill.Value < 1)
             {
                 prefs.HillType = Models.HillType.None;
+                Label_Hill.Text = "Geen";
             }
             else if (Slider_Hill.Value >= 1 && Slider_Hill.Value < 2)
             {
                 prefs.HillType = Models.HillType.Sloped;
+                Label_Hill.Text = "Geheld";
             }
             else if (Slider_Hill.Value >= 2)
             {
                 prefs.HillType = Models.HillType.Steep;
+                Label_Hill.Text = "Steil";
             }
-
-            Label_Hill.Text = prefs.HillType.ToString();
         }
 
         private void Slider_Forest_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -51,17 +75,18 @@ namespace WandelApp.Views
             if (Slider_Forest.Value >= 0 && Slider_Forest.Value < 1)
             {
                 prefs.ForestDensity = Models.ForestDensity.None;
+                Label_Forest.Text = "Geen";
             }
             else if (Slider_Forest.Value >= 1 && Slider_Forest.Value < 2)
             {
                 prefs.ForestDensity = Models.ForestDensity.Thin;
+                Label_Forest.Text = "Dun";
             }
             else if (Slider_Forest.Value >= 2)
             {
                 prefs.ForestDensity = Models.ForestDensity.Thick;
+                Label_Forest.Text = "Dik";
             }
-
-            Label_Forest.Text = prefs.ForestDensity.ToString();
         }
 
         private void Slider_Flatness_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -69,12 +94,13 @@ namespace WandelApp.Views
             if (Slider_Flatness.Value >= 0 && Slider_Flatness.Value < 1)
             {
                 prefs.RouteFlatness = Models.RouteFlatness.Flat;
+                Label_Flatness.Text = "Vlak";
             }
             else if (Slider_Flatness.Value >= 1 && Slider_Flatness.Value < 2)
             {
                 prefs.RouteFlatness = Models.RouteFlatness.Bumpy;
+                Label_Flatness.Text = "Hobbelig";
             }
-            Label_Flatness.Text = prefs.RouteFlatness.ToString();
         }
 
         private void Slider_Signs_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -82,33 +108,50 @@ namespace WandelApp.Views
             if (Slider_Signs.Value >= 0 && Slider_Signs.Value < 1)
             {
                 prefs.RoadSigns = Models.RoadSigns.None;
+                Label_Signs.Text = "Geen";
             }
             else if (Slider_Signs.Value >= 1 && Slider_Signs.Value < 2)
             {
                 prefs.RoadSigns = Models.RoadSigns.Some;
+                Label_Signs.Text = "Weinig";
             }
             else if (Slider_Signs.Value >= 2 && Slider_Signs.Value < 3)
             {
                 prefs.RoadSigns = Models.RoadSigns.Many;
+                Label_Signs.Text = "Veel";
             }
-            Label_Signs.Text = prefs.RoadSigns.ToString();
         }
 
 
         private void HidePreferencesButton_Clicked(object sender, EventArgs e)
         {
             StackFilters.IsVisible = !StackFilters.IsVisible;
-
         }
 
         private void Switch_Asphalt_Toggled(object sender, ToggledEventArgs e)
         {
-            label_asphalted.Text = Switch_Asphalt.IsToggled.ToString();
+            prefs.RouteAsphalted = Switch_Asphalt.IsToggled;
+            if (Switch_Asphalt.IsToggled)
+            {
+                label_asphalted.Text = "Ja";
+            }
+            else
+            {
+                label_asphalted.Text = "Nee";
+            }
         }
 
         private void Switch_Marshiness_Toggled(object sender, ToggledEventArgs e)
         {
-            label_Marshiness.Text = Switch_Marshiness.IsToggled.ToString();
+            prefs.Marshiness = Switch_Marshiness.IsToggled;
+            if (Switch_Marshiness.IsToggled)
+            {
+                label_Marshiness.Text = "Ja";
+            }
+            else
+            {
+                label_Marshiness.Text = "Nee";
+            }
         }
 
         private void SavePreferencesButton_Clicked(object sender, EventArgs e)
@@ -117,12 +160,12 @@ namespace WandelApp.Views
 
             DbPreference.WipePreferences();
             DbPreference.SavePreferences(prefs);
-            DisplayAlert("Melding","Voorkeuren opgeslagen","k");
+            DisplayAlert("Status","Voorkeuren succesvol opgeslagen!","OK");
         }
 
         private void Slider_Lenght_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-            prefs.Length = (decimal)Slider_Lenght.Value /10;
+            prefs.Length = (decimal)Slider_Lenght.Value;
             Label_Lenght.Text = prefs.Length.ToString();
         }
 
@@ -135,24 +178,30 @@ namespace WandelApp.Views
 
             base.OnAppearing();
 
-            Models.Database db = new Models.Database();
-            Preferences preferences = db.GetPreferences();
-            int diff = preferences.CalculateDifficulty(preferences);
-            l.WriteToLog(diff.ToString());
-
-            List<Route> routes = await db.GetAllRoutes();
-
-            ObservableCollection<Route> routeCollection = new ObservableCollection<Route>();
-
-            foreach (Route route in routes)
+            try
             {
-                l.WriteToLog("Route! " + route.Name);
-                routeCollection.Add(route);
+                Models.Database db = new Models.Database();
+                Preferences preferences = db.GetPreferences();
+                int diff = preferences.CalculateDifficulty(preferences);
+                l.WriteToLog(diff.ToString());
+
+                List<Route> routes = await db.GetAllRoutes();
+
+                ObservableCollection<Route> routeCollection = new ObservableCollection<Route>();
+
+                foreach (Route route in routes)
+                {
+                    l.WriteToLog("Route! " + route.Name);
+                    routeCollection.Add(route);
+                }
+
+                ListOfRoutes.ItemsSource = routeCollection;
+                ListOfRoutes.BindingContext = this.BindingContext;
             }
-
-            ListOfRoutes.ItemsSource = routeCollection;
-            ListOfRoutes.BindingContext = this.BindingContext;
-
+            catch (Exception e)
+            {
+                l.WriteToLog(e.ToString());
+            }
         }
 
         /// <summary>
