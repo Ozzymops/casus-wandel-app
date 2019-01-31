@@ -181,17 +181,7 @@ namespace WandelApp.Views
         /// <param name="e"></param>
         private async void ListOfRoutes_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            try
-            {
-                var content = e.Item;
-                await Navigation.PushAsync(new MapPage(content));
-            }
-            catch (Exception ex)
-            {
-                Models.Logger l = new Models.Logger();
-                l.WriteToLog(ex.ToString());
-            }
-
+            await Navigation.PushAsync(new MapPage());
         }
     }
 }

@@ -17,44 +17,18 @@ namespace WandelApp.Views
             InitializeComponent();
         }
 
-        public MapPage(object content)
+        public ShowRouteOnMap()
         {
-            this.content = content;
-        }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            var locator = CrossGeolocator.Current;
-            locator.PositionChanged += Locator_PositionChanged;
-            await locator.StartListeningAsync(TimeSpan.Zero, 100);
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            CrossGeolocator.Current.StopListeningAsync();
-            CrossGeolocator.Current.PositionChanged -= Locator_PositionChanged;
-        }
-
-        void Locator_PositionChanged(object sender, PositionEventArgs e)
-        {
-            MoveMap(e.Position);
-        }
-
-        private async void GetLocation()
-        {
-            var locator = CrossGeolocator.Current;
-            var position = await locator.GetPositionAsync();
-            MoveMap(position);
-        }
-        private void MoveMap(Position position)
-        {
-            var center = new Xamarin.Forms.Maps.Position(position.Latitude, position.Longitude);
-            var span = new Xamarin.Forms.Maps.MapSpan(center, 1, 1);
-            GoogleAPIMaps.MoveToRegion(span);
+            try
+            {
+                Models.Database db = new Models.Database();
+                currentRoute = await db.GetRoute(1);
+                DrawPins(currentRoute);
+            }
+            catch()
+            {
+                
+            }
         }
     }
 }
