@@ -58,7 +58,6 @@
                     <Label x:Name="MarshLabel" Text="Nee" TextColor="DarkGreen" VerticalTextAlignment="Center" HorizontalOptions="Center" />
                     <Switch x:Name="MarshSwitch" Toggled="MarshSwitch_Toggled" HorizontalOptions="Center" />
                     <!-- Final buttons -->
-                    <Label x:Name="CriticalString" Text="" TextColor="Red" HorizontalOptions="Center" />
                     <Button x:Name="SaveButton" Text="Opslaan" Clicked="SaveButton_Clicked" HorizontalOptions="CenterAndExpand" />
                 </StackLayout>
             </ScrollView>
