@@ -131,31 +131,6 @@ namespace WandelApp.Views
         /// </summary>
         protected override async void OnAppearing()
         {
-            //base.OnAppearing();
-
-            //try
-            //{
-            //    Models.Database dbase = new Models.Database();
-            //    Preferences preferences = dbase.GetPreferences();
-            //    double difficulty = preferences.CalculateDifficulty(preferences);
-
-            //    Models.Database db = new Models.Database();
-            //    List<Route> routes = await db.GetRoutesByDifficulty(difficulty);
-            //    ObservableCollection<Route> routecollection = new ObservableCollection<Route>();
-
-            //foreach(Route route in routes)
-            //{
-            //    routecollection.Add(route);
-            //}
-            //ListOfRoutes.ItemsSource = routecollection;
-            //ListOfRoutes.BindingContext = this.BindingContext;
-            //}
-            //catch(Exception e)
-            //{
-            //    Models.Logger l = new Models.Logger();
-            //    l.WriteToLog(e.ToString());
-            //}
-
             Models.Logger l = new Models.Logger();
 
             base.OnAppearing();
@@ -165,12 +140,18 @@ namespace WandelApp.Views
             int diff = preferences.CalculateDifficulty(preferences);
             l.WriteToLog(diff.ToString());
 
-            List<Route> routes = await db.GetRoutesByDifficulty(diff);
+            List<Route> routes = await db.GetAllRoutes();
+
+            ObservableCollection<Route> routeCollection = new ObservableCollection<Route>();
 
             foreach (Route route in routes)
             {
                 l.WriteToLog("Route! " + route.Name);
+                routeCollection.Add(route);
             }
+
+            ListOfRoutes.ItemsSource = routeCollection;
+            ListOfRoutes.BindingContext = this.BindingContext;
 
         }
 

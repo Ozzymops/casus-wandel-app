@@ -66,25 +66,26 @@ namespace WandelApp.Views
                 OwnerId = db.GetCurrentUser().Id,
                 Name = NameEntry.Text,
                 Difficulty = 0, // always 0
-                StartLong = 0,  // chosen from pin
-                StartLat = 0,   // chosen from pin
-                EndLong = 0,    // chosen from pin
-                EndLat = 0,     // chosen from pin
+                StartLong = currentRoute.StartLong,  // chosen from pin
+                StartLat = currentRoute.StartLat,   // chosen from pin
+                EndLong = currentRoute.EndLong,    // chosen from pin
+                EndLat = currentRoute.EndLat,     // chosen from pin
                 POIList = poiList,
                 SequenceList = sequenceList,
                 Length = (int)LengthStepper.Value,
                 HillType = (Models.HillType)HillTypeStepper.Value,
-                Marshiness = false,
+                Marshiness = MarshinessSwitch.IsToggled,
                 ForestDensity = (Models.ForestDensity)ForestDensityStepper.Value,
                 RouteFlatness = (Models.RouteFlatness)RouteFlatnessStepper.Value,
-                RouteAsphalted = false,
-                RoadSigns = 0
+                RouteAsphalted = RouteAsphaltedSwitch.IsToggled,
+                RoadSigns = (Models.RoadSigns)RoadSignsStepper.Value
             };
             newRoute.Difficulty = newRoute.CalculateDifficulty(newRoute);
 
             // db.SaveRoute(newRoute)
             // First, save internally and then try to push externally.
             // Make DB create seperate tables of POI and Sequence
+            await DisplayAlert("OH SHIT", await db.AddRoute(newRoute), "OH");
         }
 
         private void DrawPins(Models.Route route)

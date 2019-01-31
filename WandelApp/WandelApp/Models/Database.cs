@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -239,6 +241,61 @@ namespace WandelApp.Models
         }
 
         /// <summary>
+        /// Add a route to the db.
+        /// </summary>
+        /// <returns>Route</returns>
+        public async Task<string> AddRoute(Route route)
+        {
+            string json = JsonConvert.SerializeObject(route);
+
+            var uri = new Uri(string.Format("{0}/route/AddRoute?json={1}", Models.Constants.ApiAddress, json));
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.ContentType = "application/json; charset=utf-8";
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                l.WriteToLog(json);
+
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+
+            string result = "";
+            try
+            {
+                using (var response = request.GetResponse() as HttpWebResponse)
+                {
+                    if (request.HaveResponse && response != null)
+                    {
+                        using (var reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            result = reader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            catch (WebException e)
+            {
+                if (e.Response != null)
+                {
+                    using (var error = (HttpWebResponse)e.Response)
+                    {
+                        using (var reader = new StreamReader(error.GetResponseStream()))
+                        {
+                            string errorMsg = reader.ReadToEnd();
+                            result = errorMsg;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        #region HELL
+        /// <summary>
         /// Return all Routes within a certain difficulty range to the requested method.
         /// </summary>
         /// <returns>Route list</returns>
@@ -268,6 +325,7 @@ namespace WandelApp.Models
             }
             return null;
         }
+        #endregion
         #endregion
     }
 }
