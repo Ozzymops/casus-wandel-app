@@ -4,30 +4,14 @@
              x:Class="WandelApp.Views.MapPage"
              xmlns:models="clr-namespace:WandelApp.Models"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps">
-    <ScrollView>
+    <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Vertical" HorizontalOptions="Start" Margin="10">
-                <Label x:Name="NameOfRoute" Text="Naam wandelroute" TextColor="DarkGreen"/>
-                <Label x:Name="EstematedRouteTime" Text="Geschatte looptijd" TextColor="DarkGreen"/>
-                <Label x:Name="DifficultyOfRoute" Text="Moeilijkheidsgraad" TextColor="DarkGreen"/>
-                <Label x:Name="RouteDistance" Text="Afstand:" TextColor="DarkGreen"/>
+            <StackLayout x:Name="Mapstacker">
+                <models:CustomMap x:Name="MapPage" MapType="Street" HeightRequest="200" />
             </StackLayout>
-
-            <StackLayout Margin="10">
-                <Button Text="Toon meer info"/>
-            </StackLayout>
-
-            <StackLayout Margin="180">
-                <maps:Map x:Name="GoogleAPIMaps" HeightRequest="200" WidthRequest="200"/>
-            </StackLayout>
-
-            <StackLayout Margin="10">
-                <Button Text="Legenda"/>
-            </StackLayout>
-
-            <StackLayout Margin="10">
-                <Label Text="Trivia over Point of Interest:" TextColor="DarkGreen"/>
-            </StackLayout>
+            <ScrollView>
+                <Label x:Name="LabelNameRoute" Text="Naam van de route:"/>
+            </ScrollView>
         </StackLayout>
-    </ScrollView>
+    </ContentPage.Content>
 </ContentPage>
