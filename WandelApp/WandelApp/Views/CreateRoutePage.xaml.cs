@@ -95,7 +95,7 @@ namespace WandelApp.Views
             // Set variables
             try
             {
-                int routeId = await db.GetLastId();
+                int routeId = await db.GetLastId() + 1;
                 newRoute.OwnerId = db.GetCurrentUser().Id;
                 newRoute.Name = NameEntry.Text;
                 newRoute.Length = (int)LengthStepper.Value;
