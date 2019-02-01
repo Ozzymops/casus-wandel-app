@@ -26,10 +26,21 @@
             <!-- stacklayout color -->
             <Color x:Key="StackLayOutColors">LightGreen</Color>
 
-
+            <!-- M/dPage -->
+            <Style TargetType="MasterDetailPage" ApplyToDerivedTypes="True" >
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundcolorContentpages}" />
+            </Style>
+            
             <!--Contentpages-->
             <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
                 <Setter Property="BackgroundColor" Value="{StaticResource BackgroundcolorContentpages}"/>
+            </Style>
+
+            <!-- TabbedPage -->
+            <Style TargetType="TabbedPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundcolorContentpages}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavBarBackgroundColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource NavBarTextColor}" />
             </Style>
 
             <!--Labels-->

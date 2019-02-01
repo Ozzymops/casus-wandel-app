@@ -4,9 +4,35 @@
              x:Class="WandelApp.Views.PreferencesPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to PREFERENCES"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout x:Name="PreferencesHolder" BackgroundColor="LightGreen">
+                <ScrollView>
+                    <StackLayout>
+                        <Label Text="Filters:" FontSize="24" TextColor="DarkGreen" HorizontalOptions="Start" Margin="10, 0, 0, 0" />
+                        <Label Text="Lengte:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" Margin="0, 10, 0, 0" />
+                        <Label  x:Name="LengthLabel" Text="0" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Slider x:Name="LengthSlider" Minimum="0" Maximum="100" ValueChanged="LengthSlider_ValueChanged" />
+                        <Label Text="Heuveligheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Label  x:Name="HillLabel" Text="Geen" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Slider x:Name="HillSlider" Minimum="0" Maximum="2" ValueChanged="HillSlider_ValueChanged" />
+                        <Label Text="Bosdichtheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Label  x:Name="ForestLabel" Text="Geen" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Slider x:Name="ForestSlider" Minimum="0" Maximum="2" ValueChanged="ForestSlider_ValueChanged" />
+                        <Label Text="Route vlakheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Label  x:Name="FlatLabel" Text="Vlak" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Slider x:Name="FlatSlider" Minimum="0" Maximum="2" ValueChanged="FlatSlider_ValueChanged" />
+                        <Label Text="Bewegwijzering:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Label  x:Name="SignLabel" Text="Geen" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Slider x:Name="SignSlider" Minimum="0" Maximum="2" ValueChanged="SignSlider_ValueChanged" />
+                        <Label Text="Geasfalteerde weg:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Label x:Name="AsphLabel" Text="Nee" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Switch x:Name="AsphSwitch" IsToggled="False" HorizontalOptions="Center" Scale="0.5" Toggled="AsphSwitch_Toggled"/>
+                        <Label Text="Moerassigheid:" FontSize="16" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Label x:Name="MarshLabel" Text="Nee" FontSize="12" HorizontalOptions="Center" TextColor="DarkGreen" />
+                        <Switch x:Name="MarshSwitch" IsToggled="false" HorizontalOptions="Center" Scale="0.5" Toggled="MarshSwitch_Toggled"/>
+                        <Button x:Name="SaveButton" Text="Opslaan" Margin="20,0,20,5" Clicked="SaveButton_Clicked"/>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

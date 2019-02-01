@@ -4,9 +4,16 @@
              x:Class="WandelApp.Views.RoutePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to ROUTES"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout x:Name="RouteHolder" BackgroundColor="LightGreen">
+                <Label Text="Routes:" FontSize="24" HorizontalOptions="Start" Margin="10, 0, 0 , 0" TextColor="DarkGreen" />
+                <ListView x:Name="RouteList" ItemsSource="" ItemTapped="RouteList_ItemTapped" HorizontalOptions="CenterAndExpand" Margin="10, 0, 10, 0" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Name}" TextColor="DarkGreen" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
